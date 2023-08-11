@@ -9,24 +9,17 @@ namespace Croxxing.Boot
     {
         protected override IConnector[] GetConnectors()
         {
-            return new IConnector[]
-            {
-
-            };
+            throw new System.NotImplementedException();
         }
 
         protected override IController[] GetDependencies()
         {
-            return new IController[]
-            {
-
-            };
+            throw new System.NotImplementedException();
         }
 
         protected override IEnumerator StartInit()
         {
-            Application.targetFrameRate = 60;
-            yield return null;
+            throw new System.NotImplementedException();
         }
     }
 }
