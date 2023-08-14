@@ -4,6 +4,6 @@ namespace Croxxing.Boot
 {
     public class SceneLoader : BaseLoader<SceneLoader>
     {
-        protected override string SplashScene => "SplashScene";
+        protected override string SplashScene => "SplashScreen";
     }
 }
