@@ -7,12 +7,12 @@ namespace Croxxing.Boot
     {
         protected override ILoad GetLoader()
         {
-            throw new System.NotImplementedException();
+            return SceneLoader.Instance;
         }
 
         protected override IMain GetMain()
         {
-            throw new System.NotImplementedException();
+            return GameMain.Instance;
         }
     }
 }
