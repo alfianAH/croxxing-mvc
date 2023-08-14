@@ -1,6 +1,9 @@
 using Agate.MVC.Base;
 
-public class MainMenuView : BaseSceneView
+namespace Croxxing.Scene.MainMenu
 {
-    
+    public class MainMenuView : BaseSceneView
+    {
+
+    }
 }

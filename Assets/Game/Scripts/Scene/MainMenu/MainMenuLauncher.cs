@@ -1,6 +1,9 @@
 using Croxxing.Boot;
 
-public class MainMenuLauncher : SceneLauncher<MainMenuLauncher, MainMenuView>
+namespace Croxxing.Scene.MainMenu
 {
-    public override string SceneName => "MainMenu";
+    public class MainMenuLauncher : SceneLauncher<MainMenuLauncher, MainMenuView>
+    {
+        public override string SceneName => "MainMenu";
+    }
 }

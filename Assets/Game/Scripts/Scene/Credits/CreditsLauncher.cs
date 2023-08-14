@@ -1,6 +1,9 @@
 using Croxxing.Boot;
 
-public class CreditsLauncher : SceneLauncher<CreditsLauncher, CreditsView>
+namespace Croxxing.Scene.Credits
 {
-    public override string SceneName => "Credits";
+    public class CreditsLauncher : SceneLauncher<CreditsLauncher, CreditsView>
+    {
+        public override string SceneName => "Credits";
+    }
 }

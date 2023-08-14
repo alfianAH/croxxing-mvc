@@ -1,6 +1,9 @@
 using Agate.MVC.Base;
 
-public class CreditsView : BaseSceneView
+namespace Croxxing.Scene.Credits
 {
-    
+    public class CreditsView : BaseSceneView
+    {
+
+    }
 }

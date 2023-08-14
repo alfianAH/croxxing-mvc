@@ -1,6 +1,9 @@
 using Agate.MVC.Base;
 
-public class GameplayView : BaseSceneView
+namespace Croxxing.Scene.Gameplay
 {
-    
+    public class GameplayView : BaseSceneView
+    {
+
+    }
 }

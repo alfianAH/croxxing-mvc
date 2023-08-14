@@ -1,6 +1,9 @@
 using Croxxing.Boot;
 
-public class GameplayLauncher : SceneLauncher<GameplayLauncher, GameplayView>
+namespace Croxxing.Scene.Gameplay
 {
-    public override string SceneName => "Gameplay";
+    public class GameplayLauncher : SceneLauncher<GameplayLauncher, GameplayView>
+    {
+        public override string SceneName => "Gameplay";
+    }
 }
