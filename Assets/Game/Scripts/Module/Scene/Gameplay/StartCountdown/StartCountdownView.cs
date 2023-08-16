@@ -1,29 +1,37 @@
 ﻿using Agate.MVC.Base;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Croxxing.Module.Scene.Gameplay.StartCountdown
 {
     public class StartCountdownView : ObjectView<IStartCountdownModel>
     {
+        [SerializeField] private Text _countdownInstruction;
         [SerializeField] private Text _countdownText;
-        [SerializeField] private Button _countdownButton;
+        [SerializeField] private Slider _countdownSlider;
 
-        public void SetCallbacks(UnityAction onClickAnywhere)
+        private Action _onUpdate;
+
+        public void Init(Action onUpdate)
         {
-            _countdownButton.onClick.RemoveAllListeners();
-            _countdownButton.onClick.AddListener(onClickAnywhere);
+            _onUpdate = onUpdate;
+        }
+
+        private void Update()
+        {
+            _onUpdate?.Invoke();
         }
 
         protected override void InitRenderModel(IStartCountdownModel model)
         {
-            _countdownText.text = model.Timer.ToString();
+            
         }
 
         protected override void UpdateRenderModel(IStartCountdownModel model)
         {
-            _countdownText.text = model.Timer.ToString();
+            _countdownText.text = ((float)model.Remaining / 1000.0f).ToString("F2");
+            _countdownSlider.value = model.Progress;
         }
     }
 }
