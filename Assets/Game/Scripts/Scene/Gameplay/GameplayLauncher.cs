@@ -22,7 +22,7 @@ namespace Croxxing.Scene.Gameplay
 
         protected override IEnumerator InitSceneObject()
         {
-            _tapAnywhereController.OnTapAnywhere(_view.startCountdownView);
+            _tapAnywhereController.SetView(_view.tapAnywhereView);
 
             yield return base.InitSceneObject();
         }

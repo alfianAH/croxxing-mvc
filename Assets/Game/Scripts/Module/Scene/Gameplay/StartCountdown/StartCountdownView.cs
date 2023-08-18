@@ -1,5 +1,6 @@
 ﻿using Agate.MVC.Base;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,8 +22,9 @@ namespace Croxxing.Module.Scene.Gameplay.StartCountdown
             _countdownSlider.gameObject.SetActive(true);
         }
 
-        public void StopTimer()
+        public IEnumerator StopTimer()
         {
+            yield return new WaitUntil(() => _model.IsCompleted);
             _onUpdate = null;
         }
 

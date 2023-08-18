@@ -36,7 +36,7 @@ namespace Croxxing.Module.Scene.Gameplay.StartCountdown
                 Passed = currentTime - StartTime;
                 Remaining = Passed >= Duration ? 0 : Duration - Passed;
                 Progress = Mathf.Clamp01(Mathf.Abs(
-                    (Passed - Duration) / Duration
+                    (Passed - (float)Duration) / Duration
                 ));
                 IsCompleted = Remaining == 0;
                 SetDataAsDirty();

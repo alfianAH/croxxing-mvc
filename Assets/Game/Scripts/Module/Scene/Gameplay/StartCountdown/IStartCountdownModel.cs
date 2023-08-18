@@ -6,5 +6,6 @@ namespace Croxxing.Module.Scene.Gameplay.StartCountdown
     {
         public long Remaining { get; }
         public float Progress { get; }
+        public bool IsCompleted { get; }
     }
 }

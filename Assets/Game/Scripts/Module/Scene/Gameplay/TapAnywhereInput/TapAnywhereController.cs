@@ -5,16 +5,24 @@ using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.TapAnywhereInput
 {
-    public class TapAnywhereController : BaseController<TapAnywhereController>
+    public class TapAnywhereController : ObjectController<TapAnywhereController, TapAnywhereView>
     {
         private StartCountdownModel _startCountdownModel;
-        
-        public void OnTapAnywhere(StartCountdownView view)
+        private const int COUNTDOWN_SECONDS = 3;
+
+        public override void SetView(TapAnywhereView view)
         {
-            _startCountdownModel = new StartCountdownModel(5);
-            view.SetModel(_startCountdownModel);
-            view.Init(TickTimer);
+            base.SetView(view);
+            view.OnTapAnywhere(OnTapAnywhere);
+        }
+
+        public void OnTapAnywhere()
+        {
+            _startCountdownModel = new StartCountdownModel(COUNTDOWN_SECONDS);
+            _view.CountdownView.SetModel(_startCountdownModel);
+            _view.CountdownView.Init(TickTimer);
             StartTimer();
+            _view.StopCountdownIfCompleted();
         }
 
         private void StartTimer()
