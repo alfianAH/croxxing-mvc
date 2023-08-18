@@ -13,27 +13,31 @@ namespace Croxxing.Module.Scene.Gameplay.StartCountdown
         public bool IsStarted { get; private set; }
         public bool IsCompleted { get; private set; }
 
+        public StartCountdownModel() { }
+
         public StartCountdownModel(int second)
         {
             Duration = second * 1000;
         }
 
-        public void StartTimer(long currentTime)
+        public void StartCountdown(long currentTime)
         {
             StartTime = currentTime;
             IsStarted = true;
             IsCompleted = false;
-            UpdateTimer(currentTime);
+            UpdateCountdown(currentTime);
             SetDataAsDirty();
         }
 
-        public void UpdateTimer(long currentTime)
+        public void UpdateCountdown(long currentTime)
         {
             if(IsStarted && !IsCompleted)
             {
                 Passed = currentTime - StartTime;
                 Remaining = Passed >= Duration ? 0 : Duration - Passed;
-                Progress = Mathf.Clamp01((float)Passed / (float)Duration);
+                Progress = Mathf.Clamp01(Mathf.Abs(
+                    (Passed - Duration) / Duration
+                ));
                 IsCompleted = Remaining == 0;
                 SetDataAsDirty();
             }

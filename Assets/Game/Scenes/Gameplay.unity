@@ -690,6 +690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd87f7890dca6d541a8d6f150a4ebad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startCountdownView: {fileID: 1908951492}
 --- !u!4 &1346996931
 Transform:
   m_ObjectHideFlags: 0
@@ -932,7 +933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 250}
+  m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 250, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1657938692
