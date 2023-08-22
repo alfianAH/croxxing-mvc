@@ -1,4 +1,5 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Message;
 using Croxxing.Module.Scene.Gameplay.StartCountdown;
 using System;
 using UnityEngine;
@@ -36,7 +37,7 @@ namespace Croxxing.Module.Scene.Gameplay.TapAnywhereInput
             _startCountdownModel.UpdateCountdown(currentTime);
             if (_startCountdownModel.IsCompleted)
             {
-                Debug.Log("Start play");
+                Publish(new StartPlayMessage());
             }
         }
 

@@ -26,6 +26,7 @@ namespace Croxxing.Module.Scene.Gameplay.StartCountdown
         {
             yield return new WaitUntil(() => _model.IsCompleted);
             _onUpdate = null;
+            gameObject.SetActive(false);
         }
 
         private void Awake()

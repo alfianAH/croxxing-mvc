@@ -1,7 +1,7 @@
 using System.Collections;
-using UnityEngine;
 using Agate.MVC.Base;
 using Agate.MVC.Core;
+using Croxxing.Module.Global.ControlsData;
 
 namespace Croxxing.Boot
 {
@@ -14,7 +14,10 @@ namespace Croxxing.Boot
 
         protected override IController[] GetDependencies()
         {
-            return null;
+            return new IController[] 
+            {
+                new ControlsController(),
+            };
         }
 
         protected override IEnumerator StartInit()

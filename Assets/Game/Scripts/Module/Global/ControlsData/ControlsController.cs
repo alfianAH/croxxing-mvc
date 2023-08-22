@@ -30,12 +30,12 @@ namespace Croxxing.Module.Global.ControlsData
         private void Load()
         {
             string directory = Path.Combine(Application.persistentDataPath, "Save");
-            string path = Path.Combine(directory, "Progress.json");
-
+            string path = Path.Combine(directory, "Controls.json");
+            
             if(File.Exists(path))
             {
-                string progressFile = File.ReadAllText(path);
-                Controls controls = JsonUtility.FromJson<Controls>(progressFile);
+                string controlsFile = File.ReadAllText(path);
+                Controls controls = JsonUtility.FromJson<Controls>(controlsFile);
                 _model.SetControls(controls);
             }
             else
@@ -47,8 +47,8 @@ namespace Croxxing.Module.Global.ControlsData
 
         private void InitProgress()
         {
-            TextAsset initProgressFile = Resources.Load<TextAsset>(@"Data/Controls/InitialControls.json");
-            Controls controls = JsonUtility.FromJson<Controls>(initProgressFile.text);
+            TextAsset initControlsFile = Resources.Load<TextAsset>("Data/Controls/InitialControls");
+            Controls controls = JsonUtility.FromJson<Controls>(initControlsFile.text);
             _model.SetControls(controls);
             Save();
         }
