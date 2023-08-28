@@ -22,7 +22,12 @@ namespace Croxxing.Module.Scene.Gameplay.StartCountdown
             _countdownSlider.gameObject.SetActive(true);
         }
 
-        public IEnumerator StopTimer()
+        public void StopCountdownIfCompleted()
+        {
+            StartCoroutine(StopTimer());
+        }
+
+        private IEnumerator StopTimer()
         {
             yield return new WaitUntil(() => _model.IsCompleted);
             _onUpdate = null;

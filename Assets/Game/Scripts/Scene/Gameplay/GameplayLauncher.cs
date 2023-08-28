@@ -3,6 +3,7 @@ using Agate.MVC.Core;
 using Croxxing.Boot;
 using Croxxing.Module.Global.ControlsData;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerMovement;
+using Croxxing.Module.Scene.Gameplay.StartCountdown;
 using Croxxing.Module.Scene.Gameplay.TapAnywhereInput;
 using Croxxing.Utility;
 using System.Collections;
@@ -13,7 +14,7 @@ namespace Croxxing.Scene.Gameplay
     {
         public override string SceneName => GameScenes.GAMEPLAY;
 
-        private TapAnywhereController _tapAnywhereController;
+        private StartCountdownController _startCountdownController;
         private PlayerMovementController _playerMovementController;
 
         protected override IController[] GetSceneDependencies()
@@ -21,14 +22,15 @@ namespace Croxxing.Scene.Gameplay
             return new IController[]
             {
                 new TapAnywhereController(),
-                new PlayerMovementController()
+                new PlayerMovementController(),
+                new StartCountdownController()
             };
         }
 
         protected override IEnumerator InitSceneObject()
         {
-            _tapAnywhereController.SetView(_view.tapAnywhereView);
             _playerMovementController.SetView(_view.playerMovementView);
+            _startCountdownController.SetView(_view.startCountdownView);
 
             yield return base.InitSceneObject();
         }
@@ -38,6 +40,7 @@ namespace Croxxing.Scene.Gameplay
             return new IConnector[]
             {
                 new PlayerMovementConnector(),
+                new StartCountdownConnector()
             };
         }
     }

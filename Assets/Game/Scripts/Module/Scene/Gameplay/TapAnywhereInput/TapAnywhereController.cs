@@ -1,49 +1,29 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Message;
-using Croxxing.Module.Scene.Gameplay.StartCountdown;
-using System;
-using UnityEngine;
+using Croxxing.Module.Scene.Gameplay.InputSystem;
+using System.Collections;
+using UnityEngine.InputSystem;
 
 namespace Croxxing.Module.Scene.Gameplay.TapAnywhereInput
 {
-    public class TapAnywhereController : ObjectController<TapAnywhereController, TapAnywhereView>
+    public class TapAnywhereController : BaseController<TapAnywhereController>
     {
-        private StartCountdownModel _startCountdownModel;
-        private const int COUNTDOWN_SECONDS = 3;
+        private InputActionManager _inputActionsManager = new InputActionManager();
 
-        public override void SetView(TapAnywhereView view)
+        public override IEnumerator Initialize()
         {
-            base.SetView(view);
-            view.OnTapAnywhere(OnTapAnywhere);
+            yield return base.Initialize();
+            _inputActionsManager.UI.Enable();
+            _inputActionsManager.UI.TapAnywhere.performed += OnTapAnywhere;
         }
 
-        public void OnTapAnywhere()
+        public void OnTapAnywhere(InputAction.CallbackContext context)
         {
-            _startCountdownModel = new StartCountdownModel(COUNTDOWN_SECONDS);
-            _view.CountdownView.SetModel(_startCountdownModel);
-            _view.CountdownView.Init(TickTimer);
-            StartTimer();
-            _view.StopCountdownIfCompleted();
-        }
-
-        private void StartTimer()
-        {
-            _startCountdownModel.StartCountdown(GetCurrentTime());
-        }
-
-        private void TickTimer()
-        {
-            long currentTime = GetCurrentTime();
-            _startCountdownModel.UpdateCountdown(currentTime);
-            if (_startCountdownModel.IsCompleted)
+            if (context.performed)
             {
-                Publish(new StartPlayMessage());
+                _inputActionsManager.UI.Disable();
+                Publish(new TapAnywhereMessage());
             }
-        }
-
-        private long GetCurrentTime()
-        {
-            return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
     }
 }

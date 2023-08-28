@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 810566515}
   - component: {fileID: 810566516}
   - component: {fileID: 810566517}
+  - component: {fileID: 810566518}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -542,6 +543,40 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &810566518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810566513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 5839177c3f5b2e5409198b3d949db1e9, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f0c9c886-1961-44d0-9088-4a82d741c6bd
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &825654774
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,8 +764,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd87f7890dca6d541a8d6f150a4ebad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tapAnywhereView: {fileID: 1908951493}
   playerMovementView: {fileID: 810566516}
+  startCountdownView: {fileID: 1908951492}
 --- !u!4 &1346996931
 Transform:
   m_ObjectHideFlags: 0
@@ -950,7 +985,6 @@ GameObject:
   - component: {fileID: 1908951491}
   - component: {fileID: 1908951490}
   - component: {fileID: 1908951492}
-  - component: {fileID: 1908951493}
   m_Layer: 0
   m_Name: Start Countdown Panel
   m_TagString: Untagged
@@ -1033,19 +1067,6 @@ MonoBehaviour:
   _countdownInstruction: {fileID: 306090193}
   _countdownText: {fileID: 2100204175}
   _countdownSlider: {fileID: 1425258731}
---- !u!114 &1908951493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908951488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b53425a00ed6e340bc555c372287729, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startCountdownView: {fileID: 1908951492}
 --- !u!1 &1953934545
 GameObject:
   m_ObjectHideFlags: 0

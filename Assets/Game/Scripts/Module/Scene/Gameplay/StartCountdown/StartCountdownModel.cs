@@ -1,5 +1,6 @@
 using Agate.MVC.Base;
 using UnityEngine;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 namespace Croxxing.Module.Scene.Gameplay.StartCountdown
 {
@@ -12,8 +13,12 @@ namespace Croxxing.Module.Scene.Gameplay.StartCountdown
         public float Progress { get; private set; }
         public bool IsStarted { get; private set; }
         public bool IsCompleted { get; private set; }
+        private const int COUNTDOWN_SECONDS = 3;
 
-        public StartCountdownModel() { }
+        public StartCountdownModel()
+        {
+            Duration = COUNTDOWN_SECONDS * 1000;
+        }
 
         public StartCountdownModel(int second)
         {
