@@ -8,13 +8,10 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerMovement
 {
     public class PlayerMovementController: ObjectController<PlayerMovementController, PlayerMovementModel, IPlayerMovementModel, PlayerMovementView>
     {
-        private const float SPEED = 5f;
-        private ControlsController _controlsController;
-
-        public override IEnumerator Finalize()
+        public override IEnumerator Initialize()
         {
-            yield return base.Finalize();
-            _model.SetControls(_controlsController.Model.ControlsData);
+            yield return base.Initialize();
+            Init();
         }
 
         public override void SetView(PlayerMovementView view)
@@ -25,28 +22,53 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerMovement
 
         public void OnStartPlay(StartPlayMessage message)
         {
-            _model.SetSpeed(SPEED);
+            _model.SetSpeed(_view.PlayerSpeed);
             _model.SetCanMove(true);
+        }
+
+        private void Init()
+        {
+            Controls controls = new Controls();
+            ControlsModel controlsModel = new ControlsModel();
+            controlsModel.SetControls(controls);
+            controlsModel.SetMoveUpKey(KeyCode.W);
+            controlsModel.SetMoveLeftKey(KeyCode.A);
+            controlsModel.SetMoveDownKey(KeyCode.S);
+            controlsModel.SetMoveRightKey(KeyCode.D);
+
+            _model.SetControls(controlsModel.ControlsData);
         }
 
         private void MoveUp()
         {
-            Debug.Log("Move up");
+            _view.PlayerTransform.position = new Vector2(
+                _view.PlayerTransform.position.x,
+                _view.PlayerTransform.position.y + Time.deltaTime * _model.Speed
+            );
         }
 
         private void MoveDown()
         {
-            Debug.Log("Move down");
+            _view.PlayerTransform.position = new Vector2(
+                _view.PlayerTransform.position.x,
+                _view.PlayerTransform.position.y - Time.deltaTime * _model.Speed
+            );
         }
 
         private void MoveLeft()
         {
-            Debug.Log("Move left");
+            _view.PlayerTransform.position = new Vector2(
+                _view.PlayerTransform.position.x - Time.deltaTime * _model.Speed,
+                _view.PlayerTransform.position.y
+            );
         }
 
         private void MoveRight()
         {
-            Debug.Log("Move right");
+            _view.PlayerTransform.position = new Vector2(
+                _view.PlayerTransform.position.x + Time.deltaTime * _model.Speed,
+                _view.PlayerTransform.position.y
+            );
         }
     }
 }
