@@ -3,9 +3,9 @@ using Croxxing.Module.Global.ControlsData;
 using System;
 using UnityEngine;
 
-namespace Croxxing.Module.Scene.Gameplay.Player.PlayerMovement
+namespace Croxxing.Module.Scene.Gameplay.Player.PlayerManager
 {
-    public class PlayerMovementView : ObjectView<IPlayerMovementModel>
+    public class PlayerManagerView : ObjectView<IPlayerManagerModel>
     {
         [Range(0f, 10f)]
         [SerializeField] private float _playerSpeed = 8f;
@@ -35,9 +35,8 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerMovement
         private void Update()
         {
             if (_model == null) return;
-            if (!_model.CanMove) return;
 
-            if (Input.GetKey(_model.ControlsData.MoveUp))
+            /*if (Input.GetKey(_model.ControlsData.MoveUp))
             {
                 _moveUpAction?.Invoke();
             }
@@ -55,11 +54,11 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerMovement
             if (Input.GetKey(_model.ControlsData.MoveRight))
             {
                 _moveRightAction?.Invoke();
-            }
+            }*/
         }
 
-        protected override void InitRenderModel(IPlayerMovementModel model) { }
+        protected override void InitRenderModel(IPlayerManagerModel model) { }
 
-        protected override void UpdateRenderModel(IPlayerMovementModel model) { }
+        protected override void UpdateRenderModel(IPlayerManagerModel model) { }
     }
 }

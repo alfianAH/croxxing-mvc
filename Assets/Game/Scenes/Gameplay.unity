@@ -434,9 +434,9 @@ GameObject:
   m_Component:
   - component: {fileID: 810566514}
   - component: {fileID: 810566515}
-  - component: {fileID: 810566516}
   - component: {fileID: 810566517}
   - component: {fileID: 810566518}
+  - component: {fileID: 810566516}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 810566513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52cbf898514b6f24ca916bea7310eab8, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b6092b5e5fa1c04aaedd5245df81053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpeed: 8
@@ -764,7 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd87f7890dca6d541a8d6f150a4ebad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovementView: {fileID: 810566516}
+  playerManagerView: {fileID: 810566516}
   startCountdownView: {fileID: 1908951492}
 --- !u!4 &1346996931
 Transform:

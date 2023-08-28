@@ -1,11 +1,11 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Message;
 
-namespace Croxxing.Module.Scene.Gameplay.Player.PlayerMovement
+namespace Croxxing.Module.Scene.Gameplay.Player.PlayerInput
 {
-    public class PlayerMovementConnector : BaseConnector
+    public class PlayerInputConnector : BaseConnector
     {
-        private PlayerMovementController _playerMovementController;
+        private PlayerInputController _playerMovementController;
         
         protected override void Connect()
         {
