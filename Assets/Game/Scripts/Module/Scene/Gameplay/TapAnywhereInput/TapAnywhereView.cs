@@ -31,7 +31,7 @@ namespace Croxxing.Module.Scene.Gameplay.TapAnywhereInput
 
         private void Update()
         {
-            if (Input.GetMouseButtonUp(0) && _isFirstTime)
+            if (Input.GetMouseButtonUp(0) && _isFirstTime && _onTapAnywhere != null)
             {
                 _isFirstTime = false;
                 _onTapAnywhere?.Invoke();
