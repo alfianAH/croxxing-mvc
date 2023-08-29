@@ -4,7 +4,6 @@ using Croxxing.Boot;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerManager;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerInput;
 using Croxxing.Module.Scene.Gameplay.StartCountdown;
-using Croxxing.Module.Scene.Gameplay.TapAnywhereInput;
 using Croxxing.Utility;
 using System.Collections;
 
@@ -21,7 +20,6 @@ namespace Croxxing.Scene.Gameplay
         {
             return new IController[]
             {
-                new TapAnywhereController(),
                 new StartCountdownController(),
                 new PlayerInputController(),
                 new PlayerManagerController(),
