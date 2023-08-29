@@ -6,6 +6,7 @@ using Croxxing.Module.Scene.Gameplay.Player.PlayerInput;
 using Croxxing.Module.Scene.Gameplay.StartCountdown;
 using Croxxing.Utility;
 using System.Collections;
+using Croxxing.Module.Scene.Gameplay.Connector;
 
 namespace Croxxing.Scene.Gameplay
 {
@@ -38,8 +39,8 @@ namespace Croxxing.Scene.Gameplay
         {
             return new IConnector[]
             {
+                new GameplayConnector(),
                 new StartCountdownConnector(),
-                new PlayerInputConnector(),
                 new PlayerManagerConnector(),
             };
         }

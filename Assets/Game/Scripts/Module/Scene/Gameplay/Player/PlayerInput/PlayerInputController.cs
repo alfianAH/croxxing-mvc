@@ -18,11 +18,13 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerInput
             _inputActionsManager.UI.TapAnywhere.performed += OnTapAnywhere;
         }
 
-        public void OnStartPlay(StartPlayMessage message)
+        public void OnStartPlay()
         {
             _inputActionsManager.Player.Enable();
             _inputActionsManager.Player.Move.performed += OnMove;
             _inputActionsManager.Player.Move.canceled += OnMove;
+
+            _inputActionsManager.Player.Pause.performed += OnPause;
         }
 
         private void OnTapAnywhere(InputAction.CallbackContext context)
@@ -40,6 +42,14 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerInput
             {
                 Vector2 inputAxis = context.ReadValue<Vector2>();
                 Publish(new PlayerMovementMessage(inputAxis));
+            }
+        }
+
+        private void OnPause(InputAction.CallbackContext context)
+        {
+            if (context.performed) 
+            {
+                Publish(new GamePausedMessage());
             }
         }
     }
