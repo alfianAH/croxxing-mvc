@@ -1,4 +1,5 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Scene.Gameplay.GamePause;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerManager;
 using Croxxing.Module.Scene.Gameplay.StartCountdown;
 
@@ -8,5 +9,6 @@ namespace Croxxing.Scene.Gameplay
     {
         public PlayerManagerView playerManagerView;
         public StartCountdownView startCountdownView;
+        public GamePauseView gamePauseView;
     }
 }

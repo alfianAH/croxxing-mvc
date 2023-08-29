@@ -8,6 +8,7 @@ namespace Croxxing.Module.Scene.Gameplay.StartCountdown
 {
     public class StartCountdownView : ObjectView<IStartCountdownModel>
     {
+        [SerializeField] private GameObject _countdownPanel;
         [SerializeField] private Text _countdownInstruction;
         [SerializeField] private Text _countdownText;
         [SerializeField] private Slider _countdownSlider;
@@ -31,11 +32,12 @@ namespace Croxxing.Module.Scene.Gameplay.StartCountdown
         {
             yield return new WaitUntil(() => _model.IsCompleted);
             _onUpdate = null;
-            gameObject.SetActive(false);
+            _countdownPanel.gameObject.SetActive(false);
         }
 
         private void Awake()
         {
+            _countdownPanel.gameObject.SetActive(true);
             _countdownInstruction.gameObject.SetActive(true);
             _countdownText.gameObject.SetActive(false);
             _countdownSlider.gameObject.SetActive(false);

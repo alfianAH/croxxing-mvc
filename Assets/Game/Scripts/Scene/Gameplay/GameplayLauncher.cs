@@ -7,6 +7,7 @@ using Croxxing.Module.Scene.Gameplay.StartCountdown;
 using Croxxing.Utility;
 using System.Collections;
 using Croxxing.Module.Scene.Gameplay.Connector;
+using Croxxing.Module.Scene.Gameplay.GamePause;
 
 namespace Croxxing.Scene.Gameplay
 {
@@ -16,6 +17,7 @@ namespace Croxxing.Scene.Gameplay
 
         private StartCountdownController _startCountdownController;
         private PlayerManagerController _playerManagerController;
+        private GamePauseController _gamePauseController;
 
         protected override IController[] GetSceneDependencies()
         {
@@ -24,6 +26,7 @@ namespace Croxxing.Scene.Gameplay
                 new StartCountdownController(),
                 new PlayerInputController(),
                 new PlayerManagerController(),
+                new GamePauseController(),
             };
         }
 
@@ -31,6 +34,7 @@ namespace Croxxing.Scene.Gameplay
         {
             _startCountdownController.SetView(_view.startCountdownView);
             _playerManagerController.SetView(_view.playerManagerView);
+            _gamePauseController.SetView(_view.gamePauseView);
 
             yield return base.InitSceneObject();
         }
