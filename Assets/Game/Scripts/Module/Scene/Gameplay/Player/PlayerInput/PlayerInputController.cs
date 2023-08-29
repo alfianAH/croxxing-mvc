@@ -50,6 +50,15 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerInput
             if (context.performed) 
             {
                 Publish(new GamePausedMessage());
+                _inputActionsManager.Player.Resume.performed += OnResume;
+            }
+        }
+
+        private void OnResume(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                Publish(new GameResumeMessage());
             }
         }
     }

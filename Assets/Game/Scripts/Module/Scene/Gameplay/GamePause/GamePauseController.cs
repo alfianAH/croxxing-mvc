@@ -1,4 +1,5 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Message;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.GamePause
@@ -9,6 +10,16 @@ namespace Croxxing.Module.Scene.Gameplay.GamePause
         {
             base.SetView(view);
             view.SetCallbacks(OnPause, OnResume);
+        }
+
+        public void OnGamePauseFromInput(GamePausedMessage message)
+        {
+            OnPause();
+        }
+
+        public void OnGameResumeFromInput(GameResumeMessage message)
+        {
+            OnResume();
         }
 
         private void OnPause()
