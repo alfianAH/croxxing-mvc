@@ -7,7 +7,8 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerManager
 {
     public class PlayerManagerController: ObjectController<PlayerManagerController, PlayerManagerModel, IPlayerManagerModel, PlayerManagerView>
     {
-        private const float PLAYER_SPEED = 8F;
+        private Vector2 _rawInputMovement;
+        private const float PLAYER_SPEED = 10F;
 
         public override IEnumerator Initialize()
         {
@@ -15,12 +16,21 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerManager
             _model.SetSpeed(PLAYER_SPEED);
         }
 
-        public void Move(PlayerMovementMessage message)
+        public override void SetView(PlayerManagerView view)
         {
-            _view.PlayerTransform.position = new Vector2(
-                _view.PlayerTransform.position.x + message.InputAxis.x * Time.deltaTime * _model.Speed,
-                _view.PlayerTransform.position.y + message.InputAxis.y * Time.deltaTime * _model.Speed
-            );
+            base.SetView(view);
+            view.SetCallbacks(MoveThePlayer);
+        }
+
+        public void UpdateMovement(PlayerMovementMessage message)
+        {
+            _rawInputMovement = message.InputAxis;
+        }
+
+        private void MoveThePlayer()
+        {
+            Vector2 playerPosition = _view.PlayerTransform.position;
+            _view.PlayerTransform.position = playerPosition + _model.Speed * Time.deltaTime * _rawInputMovement;
         }
     }
 }

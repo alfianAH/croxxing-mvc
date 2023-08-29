@@ -21,7 +21,8 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerInput
         public void OnStartPlay(StartPlayMessage message)
         {
             _inputActionsManager.Player.Enable();
-            _inputActionsManager.Player.Move.performed += Move;
+            _inputActionsManager.Player.Move.performed += OnMove;
+            _inputActionsManager.Player.Move.canceled += OnMove;
         }
 
         private void OnTapAnywhere(InputAction.CallbackContext context)
@@ -33,9 +34,9 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerInput
             }
         }
 
-        private void Move(InputAction.CallbackContext context)
+        private void OnMove(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (context.performed || context.canceled)
             {
                 Vector2 inputAxis = context.ReadValue<Vector2>();
                 Publish(new PlayerMovementMessage(inputAxis));

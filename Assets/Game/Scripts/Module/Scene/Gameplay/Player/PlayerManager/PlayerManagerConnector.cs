@@ -9,12 +9,12 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerManager
 
         protected override void Connect()
         {
-            Subscribe<PlayerMovementMessage>(_playerManagerController.Move);
+            Subscribe<PlayerMovementMessage>(_playerManagerController.UpdateMovement);
         }
 
         protected override void Disconnect()
         {
-            Unsubscribe<PlayerMovementMessage>(_playerManagerController.Move);
+            Unsubscribe<PlayerMovementMessage>(_playerManagerController.UpdateMovement);
         }
     }
 }
