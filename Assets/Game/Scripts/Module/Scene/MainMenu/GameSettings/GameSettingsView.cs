@@ -1,13 +1,18 @@
 using Agate.MVC.Base;
+using Agate.MVC.Core;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Croxxing.Module.Scene.MainMenu.GameSettings
 {
     public class GameSettingsView : BaseView
     {
+        public PlayerInput PlayerInputSystem { get; private set; }
+
         [Header("Menu Buttons")]
         [SerializeField] private Button _audioMenuButton;
         [SerializeField] private Button _controlsMenuButton;
@@ -22,13 +27,25 @@ namespace Croxxing.Module.Scene.MainMenu.GameSettings
         [SerializeField] private GameObject _controlsMenuPanel;
         [SerializeField] private List<GameObject> _menuPanels;
 
-        public void SetCallbacks(UnityAction onClickAudioMenuButton,  UnityAction onClickControlsMenuButton)
+        [Header("Controls Prefab")]
+        [SerializeField] private GameObject _bindActionPrefab;
+        [SerializeField] private Transform _bindActionParent;
+
+        public void SetCallbacks(UnityAction onClickAudioMenuButton,  UnityAction onClickControlsMenuButton, Action onSceneStart)
         {
             _audioMenuButton.onClick.RemoveAllListeners();
             _audioMenuButton.onClick.AddListener(onClickAudioMenuButton);
 
             _controlsMenuButton.onClick.RemoveAllListeners();
             _controlsMenuButton.onClick.AddListener(onClickControlsMenuButton);
+
+            onSceneStart.Invoke();
+        }
+
+        public GameObject DuplicateBindActionObject()
+        {
+            GameObject duplicateBindAction = Instantiate(_bindActionPrefab, _bindActionParent);
+            return duplicateBindAction;
         }
 
         public void ActivateAudioMenu()
@@ -44,6 +61,7 @@ namespace Croxxing.Module.Scene.MainMenu.GameSettings
         private void Start()
         {
             ActivateAudioMenu();
+            PlayerInputSystem = GetComponent<PlayerInput>();
         }
 
         private void ActivateMenu(GameObject targetMenuPanel, Text targetMenuButtonText)

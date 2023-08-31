@@ -17,12 +17,9 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
             _model = model;
             _view = view;
             SetView(view);
-        }
 
-        public override IEnumerator Finalize()
-        {
-            yield return base.Finalize();
             _playerInput = _gameSettingsController.GetPlayerInput();
+            UpdateBehaviour();
         }
 
         public override void SetView(ControlSettingView view)
@@ -31,7 +28,7 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
             view.SetCallbacks(OnClickRebind, OnClickReset);
         }
 
-        public void UpdateBehaviour()
+        private void UpdateBehaviour()
         {
             GetPlayerInput();
             UpdateBindingDisplayUI();
@@ -39,7 +36,7 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
 
         private void GetPlayerInput()
         {
-            _inputAction = _playerInput.actions.FindAction(_model.ActionName);
+            _inputAction = _playerInput.actions.FindAction("Move");
         }
 
         private void OnClickRebind()
