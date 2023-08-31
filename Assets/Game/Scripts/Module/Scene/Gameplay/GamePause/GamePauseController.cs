@@ -9,16 +9,28 @@ namespace Croxxing.Module.Scene.Gameplay.GamePause
         public override void SetView(GamePauseView view)
         {
             base.SetView(view);
-            view.SetCallbacks(OnPause, OnResume);
+            view.SetCallbacks(OnGamePauseFromClick, OnGameResumeFromClick);
         }
 
-        public void OnGamePauseFromInput()
+        public void OnGamePauseFromInput(GamePausedMessage message)
         {
             OnPause();
         }
 
         public void OnGameResumeFromInput(GameResumeMessage message)
         {
+            OnResume();
+        }
+
+        private void OnGamePauseFromClick()
+        {
+            Publish(new GamePausedMessage());
+            OnPause();
+        }
+
+        private void OnGameResumeFromClick()
+        {
+            Publish(new GameResumeMessage());
             OnResume();
         }
 
