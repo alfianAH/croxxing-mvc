@@ -19,6 +19,7 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
 
         [Header("Listening Panel")]
         [SerializeField] private GameObject _listeningPanel;
+        [SerializeField] private Text _listeningText;
 
         public void SetCallbacks(UnityAction onClickActionRebind, UnityAction onClickActionReset)
         {
@@ -43,26 +44,27 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
         {
             ToggleGameObjectState(_listeningPanel, newState);
         }
-
+        
         private void ToggleGameObjectState(GameObject targetGameObject, bool newState)
         {
             targetGameObject.SetActive(newState);
         }
 
-        private void UpdateActionText(string actionName, string actionBind)
+        private void UpdateActionText(string actionName, string actionBind, string currentAction)
         {
             _actionNameText.text = actionName;
             _actionBindText.text = actionBind;
+            _listeningText.text = currentAction;
         }
 
         protected override void InitRenderModel(IControlSetting model)
         {
-            UpdateActionText(model.ActionName, model.ActionBind);
+            UpdateActionText(model.ActionName, model.ActionBind, model.CurrentAction);
         }
 
         protected override void UpdateRenderModel(IControlSetting model)
         {
-            UpdateActionText(model.ActionName, model.ActionBind);
+            UpdateActionText(model.ActionName, model.ActionBind, model.CurrentAction);
         }
     }
 }

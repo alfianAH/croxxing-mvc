@@ -236,7 +236,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: shift
+  m_Text: w
 --- !u!1 &7716609268279270308
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +294,7 @@ MonoBehaviour:
   _actionNameText: {fileID: 7716609269141197554}
   _actionBindText: {fileID: 7716609268179987585}
   _listeningPanel: {fileID: 7716609269131837613}
+  _listeningText: {fileID: 7716609267732525885}
 --- !u!1 &7716609269042485501
 GameObject:
   m_ObjectHideFlags: 0

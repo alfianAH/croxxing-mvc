@@ -1,4 +1,5 @@
 using Agate.MVC.Base;
+using Agate.MVC.Core;
 using Croxxing.Module.Scene.MainMenu.ControlSetting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,15 +21,13 @@ namespace Croxxing.Module.Scene.MainMenu.GameSettings
 
         private void OnSceneStart()
         {
-            AddControlAction("Move Up", "W");
-            AddControlAction("Move Left", "A");
-            AddControlAction("Move Down", "S");
-            AddControlAction("Move Right", "D");
+            AddControlAction("Move", "W/A/S/D");
         }
 
         private void AddControlAction(string actionName, string actionBind)
         {
-            ControlSettingModel controlSettingModel = new ControlSettingModel(actionName, actionBind);
+            string actionBindId = _view.PlayerInputSystem.actions.FindAction(actionName).bindings[0].id.ToString();
+            ControlSettingModel controlSettingModel = new ControlSettingModel(actionName, actionBind, actionBindId);
             GameObject duplicateControlView = _view.DuplicateBindActionObject();
             ControlSettingView controlSettingView = duplicateControlView.GetComponent<ControlSettingView>();
 

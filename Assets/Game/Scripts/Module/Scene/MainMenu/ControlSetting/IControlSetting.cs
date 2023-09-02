@@ -6,5 +6,6 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
     {
         public string ActionName { get; }
         public string ActionBind { get; }
+        public string CurrentAction { get; }
     }
 }

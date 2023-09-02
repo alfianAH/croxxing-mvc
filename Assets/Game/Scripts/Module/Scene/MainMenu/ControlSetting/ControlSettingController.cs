@@ -1,6 +1,7 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Scene.MainMenu.GameSettings;
-using System.Collections;
+using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Croxxing.Module.Scene.MainMenu.ControlSetting
@@ -36,32 +37,94 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
 
         private void GetPlayerInput()
         {
-            _inputAction = _playerInput.actions.FindAction("Move");
+            _inputAction = _playerInput.actions.FindAction(_model.ActionName);
+        }
+
+        /// <summary>
+        /// Return the action and binding index for the binding that is targeted by the component
+        /// according to
+        /// </summary>
+        /// <param name="bindingIndex"></param>
+        /// <returns></returns>
+        public bool ResolveActionAndBinding(out int bindingIndex)
+        {
+            bindingIndex = -1;
+
+            if (_inputAction == null)
+                return false;
+
+            if (string.IsNullOrEmpty(_model.ActionBindId))
+                return false;
+
+            // Look up binding index.
+            var bindingId = new Guid(_model.ActionBindId);
+            bindingIndex = _inputAction.bindings.IndexOf(x => x.id == bindingId);
+            if (bindingIndex == -1)
+            {
+                Debug.LogError($"Cannot find binding with ID '{bindingId}' on '{_inputAction}'");
+                return false;
+            }
+
+            return true;
         }
 
         private void OnClickRebind()
         {
+            if (!ResolveActionAndBinding(out int bindingIndex))
+                return;
+
+            if (_inputAction.bindings[bindingIndex].isComposite)
+            {
+                int firstPartIndex = bindingIndex + 1;
+                if (firstPartIndex < _inputAction.bindings.Count && _inputAction.bindings[firstPartIndex].isPartOfComposite)
+                    PerformInteractiveRebind(firstPartIndex, allCompositeParts: true);
+            }
+            else
+            {
+                PerformInteractiveRebind(bindingIndex);
+            }
+        }
+
+        private void PerformInteractiveRebind(int bindingIndex, bool allCompositeParts = false)
+        {
+            _inputAction.Disable();
+            _rebindOperation?.Cancel();
+
+            _rebindOperation = _inputAction.PerformInteractiveRebinding(bindingIndex)
+                .OnCancel(operation => RebindCompleted())
+                .OnComplete(operation =>
+                {
+                    RebindCompleted();
+
+                    // If there's more composite parts we should bind, initiate a rebind
+                    // for the next part.
+                    if (allCompositeParts)
+                    {
+                        int nextBindingIndex = bindingIndex + 1;
+                        if (nextBindingIndex < _inputAction.bindings.Count && _inputAction.bindings[nextBindingIndex].isPartOfComposite)
+                            PerformInteractiveRebind(nextBindingIndex, true);
+                    }
+                });
+
             _view.ToggleActionRebindButtonState(false);
             _view.ToggleActionResetButtonState(false);
             _view.ToggleListeningPanelState(true);
+            
+            string partName = string.Empty;
+            if (_inputAction.bindings[bindingIndex].isPartOfComposite)
+                partName = $"Binding '{_inputAction.bindings[bindingIndex].name}'. ";
 
-            _rebindOperation = _inputAction.PerformInteractiveRebinding()
-                .WithControlsExcluding("<Mouse>/position")
-                .WithControlsExcluding("<Mouse>/delta")
-                .WithControlsExcluding("<Gamepad>/Start")
-                .WithControlsExcluding("<Keyboard>/p")
-                .WithControlsExcluding("<Keyboard>/escape")
-                .OnMatchWaitForAnother(0.1f)
-                .OnComplete(operation => RebindCompleted());
-
+            _model.SetCurrentAction(partName);
             _rebindOperation.Start();
         }
 
         private void RebindCompleted()
         {
+            _inputAction.Enable();
             _rebindOperation.Dispose();
             _rebindOperation = null;
 
+            _model.SetCurrentAction("Input...");
             _view.ToggleActionRebindButtonState(true);
             _view.ToggleActionResetButtonState(true);
             _view.ToggleListeningPanelState(false);
@@ -71,16 +134,31 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
 
         private void OnClickReset()
         {
-            InputActionRebindingExtensions.RemoveAllBindingOverrides(_inputAction);
+            if (!ResolveActionAndBinding(out var bindingIndex))
+                return;
+
+            if (_inputAction.bindings[bindingIndex].isComposite)
+            {
+                // It's a composite. Remove overrides from part bindings.
+                for (var i = bindingIndex + 1; i < _inputAction.bindings.Count && _inputAction.bindings[i].isPartOfComposite; ++i)
+                    _inputAction.RemoveBindingOverride(i);
+            }
+            else
+            {
+                _inputAction.RemoveBindingOverride(bindingIndex);
+            }
             UpdateBindingDisplayUI();
+
+            /*InputActionRebindingExtensions.RemoveAllBindingOverrides(_inputAction);
+            UpdateBindingDisplayUI();*/
         }
 
         private void UpdateBindingDisplayUI()
         {
-            int controlBindingIndex = _inputAction.GetBindingIndexForControl(_inputAction.controls[0]);
-            string currentBindingInput = InputControlPath.ToHumanReadableString(
-                _inputAction.bindings[controlBindingIndex].effectivePath,
-                InputControlPath.HumanReadableStringOptions.OmitDevice);
+            int bindingIndex = _inputAction.bindings.IndexOf(x => x.id.ToString() == _model.ActionBindId);
+            string currentBindingInput = string.Empty;
+            if (bindingIndex != -1)
+                currentBindingInput = _inputAction.GetBindingDisplayString(bindingIndex);
 
             _model.SetActionBind(currentBindingInput);
         }
