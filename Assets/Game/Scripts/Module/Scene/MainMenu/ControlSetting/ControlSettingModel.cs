@@ -1,4 +1,5 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Scene.Gameplay.Player.PlayerInput;
 
 namespace Croxxing.Module.Scene.MainMenu.ControlSetting
 {
@@ -8,6 +9,7 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
         public string ActionBind { get; private set; }
         public string CurrentAction { get; private set; }
         public string ActionBindId { get; private set; }
+        public PlayerInputController PlayerInputController { get; private set; }
 
         public ControlSettingModel() { }
 
@@ -34,6 +36,12 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
         public void SetCurrentAction(string currentAction)
         {
             CurrentAction = currentAction;
+            SetDataAsDirty();
+        }
+
+        public void SetPlayerInputController(PlayerInputController playerInputController)
+        {
+            PlayerInputController = playerInputController;
             SetDataAsDirty();
         }
     }

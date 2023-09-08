@@ -1,18 +1,14 @@
 using Agate.MVC.Base;
-using Agate.MVC.Core;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Croxxing.Module.Scene.MainMenu.GameSettings
 {
     public class GameSettingsView : BaseView
     {
-        public PlayerInput PlayerInputSystem { get; private set; }
-
         [Header("Menu Buttons")]
         [SerializeField] private Button _audioMenuButton;
         [SerializeField] private Button _controlsMenuButton;
@@ -61,7 +57,6 @@ namespace Croxxing.Module.Scene.MainMenu.GameSettings
         private void Start()
         {
             ActivateAudioMenu();
-            PlayerInputSystem = GetComponent<PlayerInput>();
         }
 
         private void ActivateMenu(GameObject targetMenuPanel, Text targetMenuButtonText)

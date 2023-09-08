@@ -50,21 +50,21 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
             targetGameObject.SetActive(newState);
         }
 
-        private void UpdateActionText(string actionName, string actionBind, string currentAction)
+        private void UpdateActionText(IControlSetting model)
         {
-            _actionNameText.text = actionName;
-            _actionBindText.text = actionBind;
-            _listeningText.text = currentAction;
+            _actionNameText.text = model.ActionName;
+            _actionBindText.text = model.ActionBind;
+            _listeningText.text = model.CurrentAction;
         }
 
         protected override void InitRenderModel(IControlSetting model)
         {
-            UpdateActionText(model.ActionName, model.ActionBind, model.CurrentAction);
+            UpdateActionText(model);
         }
 
         protected override void UpdateRenderModel(IControlSetting model)
         {
-            UpdateActionText(model.ActionName, model.ActionBind, model.CurrentAction);
+            UpdateActionText(model);
         }
     }
 }

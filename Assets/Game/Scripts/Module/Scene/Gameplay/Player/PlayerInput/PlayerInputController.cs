@@ -11,6 +11,8 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerInput
     {
         private InputActionManager _inputActionsManager = new InputActionManager();
 
+        public InputActionManager InputManager => _inputActionsManager;
+
         public override IEnumerator Initialize()
         {
             yield return base.Initialize();

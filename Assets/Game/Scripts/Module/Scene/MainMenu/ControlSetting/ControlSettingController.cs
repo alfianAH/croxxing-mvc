@@ -1,5 +1,4 @@
 using Agate.MVC.Base;
-using Croxxing.Module.Scene.MainMenu.GameSettings;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,9 +7,7 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
 {
     public class ControlSettingController: ObjectController<ControlSettingController, ControlSettingModel, IControlSetting, ControlSettingView>
     {
-        private GameSettingsController _gameSettingsController;
         private InputAction _inputAction;
-        private PlayerInput _playerInput;
         private InputActionRebindingExtensions.RebindingOperation _rebindOperation;
 
         public void Init(ControlSettingModel model, ControlSettingView view)
@@ -19,7 +16,6 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
             _view = view;
             SetView(view);
 
-            _playerInput = _gameSettingsController.GetPlayerInput();
             UpdateBehaviour();
         }
 
@@ -37,7 +33,7 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
 
         private void GetPlayerInput()
         {
-            _inputAction = _playerInput.actions.FindAction(_model.ActionName);
+            _inputAction = _model.PlayerInputController.InputManager.FindAction(_model.ActionName);
         }
 
         /// <summary>
@@ -46,7 +42,7 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
         /// </summary>
         /// <param name="bindingIndex"></param>
         /// <returns></returns>
-        public bool ResolveActionAndBinding(out int bindingIndex)
+        private bool ResolveActionAndBinding(out int bindingIndex)
         {
             bindingIndex = -1;
 
@@ -134,13 +130,13 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
 
         private void OnClickReset()
         {
-            if (!ResolveActionAndBinding(out var bindingIndex))
+            if (!ResolveActionAndBinding(out int bindingIndex))
                 return;
 
             if (_inputAction.bindings[bindingIndex].isComposite)
             {
                 // It's a composite. Remove overrides from part bindings.
-                for (var i = bindingIndex + 1; i < _inputAction.bindings.Count && _inputAction.bindings[i].isPartOfComposite; ++i)
+                for (int i = bindingIndex + 1; i < _inputAction.bindings.Count && _inputAction.bindings[i].isPartOfComposite; ++i)
                     _inputAction.RemoveBindingOverride(i);
             }
             else
@@ -148,9 +144,6 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
                 _inputAction.RemoveBindingOverride(bindingIndex);
             }
             UpdateBindingDisplayUI();
-
-            /*InputActionRebindingExtensions.RemoveAllBindingOverrides(_inputAction);
-            UpdateBindingDisplayUI();*/
         }
 
         private void UpdateBindingDisplayUI()

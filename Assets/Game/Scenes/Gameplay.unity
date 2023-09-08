@@ -1150,7 +1150,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1346996931}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &810566515
 SpriteRenderer:
@@ -1951,7 +1951,7 @@ MonoBehaviour:
   playerManagerView: {fileID: 810566516}
   startCountdownView: {fileID: 1588298375}
   gamePauseView: {fileID: 958173625}
-  gameSettingsView: {fileID: 1932529416}
+  gameSettingsView: {fileID: 1588298376}
 --- !u!4 &1346996931
 Transform:
   m_ObjectHideFlags: 0
@@ -1964,7 +1964,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 896771212}
-  - {fileID: 1932529418}
   - {fileID: 1588298371}
   - {fileID: 810566514}
   m_Father: {fileID: 0}
@@ -2541,6 +2540,7 @@ GameObject:
   - component: {fileID: 1588298373}
   - component: {fileID: 1588298372}
   - component: {fileID: 1588298375}
+  - component: {fileID: 1588298376}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -2563,7 +2563,7 @@ RectTransform:
   - {fileID: 1908951489}
   - {fileID: 92857582}
   m_Father: {fileID: 1346996931}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2647,6 +2647,32 @@ MonoBehaviour:
   _countdownInstruction: {fileID: 306090193}
   _countdownText: {fileID: 2100204175}
   _countdownSlider: {fileID: 1425258731}
+--- !u!114 &1588298376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588298370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f44c025ddf56ad4da77696115795c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioMenuButton: {fileID: 734844211}
+  _controlsMenuButton: {fileID: 642080897}
+  _audioMenuButtonText: {fileID: 734844209}
+  _controlsMenuButtonText: {fileID: 642080895}
+  _menuButtonTexts:
+  - {fileID: 734844209}
+  - {fileID: 642080895}
+  _audioMenuPanel: {fileID: 1354837028}
+  _controlsMenuPanel: {fileID: 1623291608}
+  _menuPanels:
+  - {fileID: 1354837028}
+  - {fileID: 1623291608}
+  _bindActionPrefab: {fileID: 7716609268279270308, guid: bff38a9de869ed14da64fcf28792764f, type: 3}
+  _bindActionParent: {fileID: 1623291609}
 --- !u!1 &1623291608
 GameObject:
   m_ObjectHideFlags: 0
@@ -2949,98 +2975,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908951488}
   m_CullTransparentMesh: 1
---- !u!1 &1932529415
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1932529418}
-  - component: {fileID: 1932529416}
-  - component: {fileID: 1932529417}
-  m_Layer: 0
-  m_Name: Game Settings View
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1932529416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932529415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f44c025ddf56ad4da77696115795c8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioMenuButton: {fileID: 734844211}
-  _controlsMenuButton: {fileID: 642080897}
-  _audioMenuButtonText: {fileID: 734844209}
-  _controlsMenuButtonText: {fileID: 642080895}
-  _menuButtonTexts:
-  - {fileID: 734844209}
-  - {fileID: 642080895}
-  _audioMenuPanel: {fileID: 1354837028}
-  _controlsMenuPanel: {fileID: 1623291608}
-  _menuPanels:
-  - {fileID: 1354837028}
-  - {fileID: 1623291608}
-  _bindActionPrefab: {fileID: 7716609268279270308, guid: bff38a9de869ed14da64fcf28792764f, type: 3}
-  _bindActionParent: {fileID: 1623291609}
---- !u!114 &1932529417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932529415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 5839177c3f5b2e5409198b3d949db1e9, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f0c9c886-1961-44d0-9088-4a82d741c6bd
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!4 &1932529418
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932529415}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1346996931}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1953934545
 GameObject:
   m_ObjectHideFlags: 0
