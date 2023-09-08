@@ -27,7 +27,7 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
             _actionRebindButton.onClick.AddListener(onClickActionRebind);
 
             _actionResetButton.onClick.RemoveAllListeners();
-            _actionRebindButton.onClick.AddListener(onClickActionReset);
+            _actionResetButton.onClick.AddListener(onClickActionReset);
         }
 
         public void ToggleActionRebindButtonState(bool newState)
