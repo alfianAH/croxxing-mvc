@@ -13,10 +13,9 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
 
         public ControlSettingModel() { }
 
-        public ControlSettingModel(string actionName, string actionBind, string actionBindId)
+        public ControlSettingModel(string actionName, string actionBindId)
         {
             ActionName = actionName;
-            ActionBind = actionBind;
             ActionBindId = actionBindId;
             SetDataAsDirty();
         }

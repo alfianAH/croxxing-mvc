@@ -20,6 +20,12 @@ namespace Croxxing.Module.Global.ControlsData
             Controls savedControls = JsonUtility.FromJson<Controls>(message.ActionJson);
             List<Binding> modelBindings = _model.ControlsData.bindings;
 
+            if (savedControls == null)
+            {
+                Debug.LogError($"UpdateControlsMessage: '{message.ActionJson}'");
+                return;
+            }
+
             foreach (Binding savedBinding in savedControls.bindings)
             {
                 for(int i=0 ; i < modelBindings.Count; i++)

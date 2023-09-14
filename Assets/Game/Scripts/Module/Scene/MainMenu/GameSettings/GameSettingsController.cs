@@ -1,4 +1,5 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Global.ControlsData;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerInput;
 using Croxxing.Module.Scene.MainMenu.ControlSetting;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace Croxxing.Module.Scene.MainMenu.GameSettings
     public class GameSettingsController : ObjectController<GameSettingsController, GameSettingsView>
     {
         private PlayerInputController _playerInputController;
+        private ControlsController _controlsController;
 
         public override void SetView(GameSettingsView view)
         {
@@ -17,14 +19,14 @@ namespace Croxxing.Module.Scene.MainMenu.GameSettings
 
         private void OnSceneStart()
         {
-            AddControlAction("Move", "W/A/S/D");
-            AddControlAction("Pause", "P");
+            AddControlAction("Move");
+            AddControlAction("Pause");
         }
 
-        private void AddControlAction(string actionName, string actionBind)
+        private void AddControlAction(string actionName)
         {
             string actionBindId = _playerInputController.InputManager.FindAction(actionName).bindings[0].id.ToString();
-            ControlSettingModel controlSettingModel = new ControlSettingModel(actionName, actionBind, actionBindId);
+            ControlSettingModel controlSettingModel = new ControlSettingModel(actionName, actionBindId);
             controlSettingModel.SetPlayerInputController(_playerInputController);
 
             GameObject duplicateControlView = _view.DuplicateBindActionObject();
@@ -33,7 +35,9 @@ namespace Croxxing.Module.Scene.MainMenu.GameSettings
             ControlSettingController controlSetting = new ControlSettingController();
             InjectDependencies(controlSetting);
 
-            controlSetting.Init(controlSettingModel, controlSettingView);
+            string controlsJson = JsonUtility.ToJson(_controlsController.Model.ControlsData);
+
+            controlSetting.Init(controlSettingModel, controlSettingView, controlsJson);
         }
 
         private void OnClickAudioMenuButton()

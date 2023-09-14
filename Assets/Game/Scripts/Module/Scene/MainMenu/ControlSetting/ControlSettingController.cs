@@ -1,8 +1,6 @@
 using Agate.MVC.Base;
-using Croxxing.Module.Global.ControlsData;
 using Croxxing.Module.Message;
 using System;
-using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,25 +11,21 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
         private InputAction _inputAction;
         private InputActionRebindingExtensions.RebindingOperation _rebindOperation;
 
-        public void Init(ControlSettingModel model, ControlSettingView view)
+        public void Init(ControlSettingModel model, ControlSettingView view, string controlJson)
         {
             _model = model;
             _view = view;
             SetView(view);
 
-            UpdateBehaviour();
+            GetPlayerInput();
+            LoadBind(controlJson);
+            UpdateBindingDisplayUI();
         }
 
         public override void SetView(ControlSettingView view)
         {
             base.SetView(view);
             view.SetCallbacks(OnClickRebind, OnClickReset);
-        }
-
-        private void UpdateBehaviour()
-        {
-            GetPlayerInput();
-            UpdateBindingDisplayUI();
         }
 
         private void GetPlayerInput()
@@ -166,7 +160,13 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
         private void SaveBind()
         {
             string savedActionJson = _inputAction.SaveBindingOverridesAsJson();
+            // BUG
             Publish(new UpdateControlsMessage(savedActionJson));
+        }
+
+        private void LoadBind(string controlJson)
+        {
+            _inputAction.LoadBindingOverridesFromJson(controlJson);
         }
     }
 }
