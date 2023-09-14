@@ -18,6 +18,7 @@ namespace Croxxing.Module.Scene.MainMenu.GameSettings
         private void OnSceneStart()
         {
             AddControlAction("Move", "W/A/S/D");
+            AddControlAction("Pause", "P");
         }
 
         private void AddControlAction(string actionName, string actionBind)

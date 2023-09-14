@@ -1,5 +1,4 @@
 using Agate.MVC.Base;
-using UnityEngine;
 
 namespace Croxxing.Module.Global.ControlsData
 {
@@ -13,27 +12,9 @@ namespace Croxxing.Module.Global.ControlsData
             SetDataAsDirty();
         }
 
-        public void SetMoveUpKey(KeyCode moveUp)
+        public void ChangeBinding(int index, Binding binding)
         {
-            ControlsData.MoveUp = moveUp;
-            SetDataAsDirty();
-        }
-
-        public void SetMoveDownKey(KeyCode moveDown)
-        {
-            ControlsData.MoveDown = moveDown;
-            SetDataAsDirty();
-        }
-
-        public void SetMoveLeftKey(KeyCode moveLeft)
-        {
-            ControlsData.MoveLeft = moveLeft;
-            SetDataAsDirty();
-        }
-
-        public void SetMoveRightKey(KeyCode moveRight)
-        {
-            ControlsData.MoveRight = moveRight;
+            ControlsData.bindings[index] = binding;
             SetDataAsDirty();
         }
     }

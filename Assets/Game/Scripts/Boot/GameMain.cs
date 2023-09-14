@@ -9,7 +9,10 @@ namespace Croxxing.Boot
     {
         protected override IConnector[] GetConnectors()
         {
-            return null;
+            return new IConnector[]
+            {
+                new ControlsConnector(),
+            };
         }
 
         protected override IController[] GetDependencies()

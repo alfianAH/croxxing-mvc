@@ -1,6 +1,7 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Message;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -14,16 +15,22 @@ namespace Croxxing.Module.Global.ControlsData
             Load();
         }
 
-        public void SetMoveKeys(UpdateControlsMessage message)
+        public void SetControlsData(UpdateControlsMessage message)
         {
-            _model.SetMoveUpKey(message.ControlsData.MoveUp);
-            _model.SetMoveDownKey(message.ControlsData.MoveDown);
-            _model.SetMoveLeftKey(message.ControlsData.MoveLeft);
-            _model.SetMoveRightKey(message.ControlsData.MoveRight);
-        }
+            Controls savedControls = JsonUtility.FromJson<Controls>(message.ActionJson);
+            List<Binding> modelBindings = _model.ControlsData.bindings;
 
-        public void SaveControls()
-        {
+            foreach (Binding savedBinding in savedControls.bindings)
+            {
+                for(int i=0 ; i < modelBindings.Count; i++)
+                {
+                    if (savedBinding.id == modelBindings[i].id)
+                    {
+                        _model.ChangeBinding(i, savedBinding);
+                    }
+                }
+            }
+
             Save();
         }
 
@@ -31,8 +38,8 @@ namespace Croxxing.Module.Global.ControlsData
         {
             string directory = Path.Combine(Application.persistentDataPath, "Save");
             string path = Path.Combine(directory, "Controls.json");
-            
-            if(File.Exists(path))
+
+            if (File.Exists(path))
             {
                 string controlsFile = File.ReadAllText(path);
                 Controls controls = JsonUtility.FromJson<Controls>(controlsFile);
@@ -48,8 +55,8 @@ namespace Croxxing.Module.Global.ControlsData
         private void InitProgress()
         {
             TextAsset initControlsFile = Resources.Load<TextAsset>("Data/Controls/InitialControls");
-            Controls controls = JsonUtility.FromJson<Controls>(initControlsFile.text);
-            _model.SetControls(controls);
+            Controls initControls = JsonUtility.FromJson<Controls>(initControlsFile.text);
+            _model.SetControls(initControls);
             Save();
         }
 

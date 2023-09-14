@@ -1,5 +1,8 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Global.ControlsData;
+using Croxxing.Module.Message;
 using System;
+using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -106,11 +109,13 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
             _view.ToggleActionResetButtonState(false);
             _view.ToggleListeningPanelState(true);
             
-            string partName = string.Empty;
+            string currentAction = string.Empty;
             if (_inputAction.bindings[bindingIndex].isPartOfComposite)
-                partName = $"Binding '{_inputAction.bindings[bindingIndex].name}'. ";
+                currentAction = $"Binding '{_inputAction.bindings[bindingIndex].name}'.";
+            else
+                currentAction = "Input...";
 
-            _model.SetCurrentAction(partName);
+            _model.SetCurrentAction(currentAction);
             _rebindOperation.Start();
         }
 
@@ -126,6 +131,7 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
             _view.ToggleListeningPanelState(false);
 
             UpdateBindingDisplayUI();
+            SaveBind();
         }
 
         private void OnClickReset()
@@ -144,6 +150,7 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
                 _inputAction.RemoveBindingOverride(bindingIndex);
             }
             UpdateBindingDisplayUI();
+            SaveBind();
         }
 
         private void UpdateBindingDisplayUI()
@@ -154,6 +161,12 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
                 currentBindingInput = _inputAction.GetBindingDisplayString(bindingIndex);
 
             _model.SetActionBind(currentBindingInput);
+        }
+
+        private void SaveBind()
+        {
+            string savedActionJson = _inputAction.SaveBindingOverridesAsJson();
+            Publish(new UpdateControlsMessage(savedActionJson));
         }
     }
 }
