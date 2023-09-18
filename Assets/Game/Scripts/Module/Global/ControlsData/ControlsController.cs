@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Croxxing.Module.Global.ControlsData
 {
@@ -20,19 +21,32 @@ namespace Croxxing.Module.Global.ControlsData
             Controls savedControls = JsonUtility.FromJson<Controls>(message.ActionJson);
             List<Binding> modelBindings = _model.ControlsData.bindings;
 
+            // If saved controls is null, then it means save the initial controls
             if (savedControls == null)
             {
-                Debug.LogError($"UpdateControlsMessage: '{message.ActionJson}'");
-                return;
-            }
+                TextAsset initControlsFile = Resources.Load<TextAsset>("Data/Controls/InitialControls");
+                Controls initControls = JsonUtility.FromJson<Controls>(initControlsFile.text);
 
-            foreach (Binding savedBinding in savedControls.bindings)
-            {
-                for(int i=0 ; i < modelBindings.Count; i++)
+                for (int i = 0; i < initControls.bindings.Count; i++)
                 {
-                    if (savedBinding.id == modelBindings[i].id)
+                    Binding initBinding = initControls.bindings[i];
+                    if (initBinding.action == $"Player/{message.ActionName}")
                     {
-                        _model.ChangeBinding(i, savedBinding);
+                        _model.ChangeBinding(i, initBinding);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Binding savedBinding in savedControls.bindings)
+                {
+                    for (int i = 0; i < modelBindings.Count; i++)
+                    {
+                        if (savedBinding.id == modelBindings[i].id)
+                        {
+                            _model.ChangeBinding(i, savedBinding);
+                            break;
+                        }
                     }
                 }
             }

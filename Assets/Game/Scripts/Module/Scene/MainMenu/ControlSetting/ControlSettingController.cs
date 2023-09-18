@@ -160,8 +160,7 @@ namespace Croxxing.Module.Scene.MainMenu.ControlSetting
         private void SaveBind()
         {
             string savedActionJson = _inputAction.SaveBindingOverridesAsJson();
-            // BUG
-            Publish(new UpdateControlsMessage(savedActionJson));
+            Publish(new UpdateControlsMessage(savedActionJson, _inputAction.name));
         }
 
         private void LoadBind(string controlJson)
