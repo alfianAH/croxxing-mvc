@@ -1,5 +1,5 @@
 using Agate.MVC.Base;
-using System.Numerics;
+using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.Road
 {
@@ -7,11 +7,13 @@ namespace Croxxing.Module.Scene.Gameplay.Road
     {
         public RoadType Type { get; private set; }
         public RoadStartingSpawn StartingSpawn { get; private set; }
-        public Vector3 SpawnPosition { get; private set; }
-        public Vector3 DespawnPosition { get; private set; }
+        public Vector3 Position { get; private set; }
+        public bool IsCurrentlyActive { get; private set; } = false;
         public float VehicleVelocity { get; private set; }
 
-        public void SetRoadType(RoadType type)
+        public RoadModel () { }
+
+        public RoadModel(RoadType type)
         {
             Type = type;
             SetDataAsDirty();
@@ -23,21 +25,21 @@ namespace Croxxing.Module.Scene.Gameplay.Road
             SetDataAsDirty();
         }
 
+        public void SetCurrentlyActive(bool isActive)
+        {
+            IsCurrentlyActive = isActive;
+            SetDataAsDirty();
+        }
+
         public void SetVehicleVelocity(float vehicleVelocity)
         {
             VehicleVelocity = vehicleVelocity;
             SetDataAsDirty();
         }
 
-        public void SetSpawnPosition(Vector3 spawnPosition)
+        public void SetPosition(Vector3 position)
         {
-            SpawnPosition = spawnPosition;
-            SetDataAsDirty();
-        }
-
-        public void SetDespawnPosition(Vector3 despawnPosition)
-        {
-            DespawnPosition = despawnPosition;
+            Position = position;
             SetDataAsDirty();
         }
     }

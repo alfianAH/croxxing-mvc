@@ -26,7 +26,7 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         private void UpdateRoad(IRoadModel model)
         {
             // Road type sprite
-            switch(model.Type)
+            /*switch(model.Type)
             {
                 case RoadType.Normal:
                     _spriteRenderer.sprite = _normalRoadSprite;
@@ -35,7 +35,7 @@ namespace Croxxing.Module.Scene.Gameplay.Road
                 case RoadType.Sidewalk:
                     _spriteRenderer.sprite = _sidewalkRoadSprite;
                     break;
-            }
+            }*/
 
             // Spawner and despawner position
             switch (model.StartingSpawn)
@@ -50,6 +50,9 @@ namespace Croxxing.Module.Scene.Gameplay.Road
                     _despawner.transform.position = _leftPositionTransform.position;
                     break;
             }
+
+            gameObject.SetActive(_model.IsCurrentlyActive);
+            transform.position = _model.Position;
         }
 
         protected override void InitRenderModel(IRoadModel model)

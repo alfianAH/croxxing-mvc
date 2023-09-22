@@ -1,5 +1,5 @@
 using Agate.MVC.Base;
-using System.Numerics;
+using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.Road
 {
@@ -17,8 +17,8 @@ namespace Croxxing.Module.Scene.Gameplay.Road
     {
         public RoadType Type { get; }
         public RoadStartingSpawn StartingSpawn { get; }
-        public Vector3 SpawnPosition { get; }
-        public Vector3 DespawnPosition { get; }
+        public Vector3 Position { get; }
+        public bool IsCurrentlyActive { get; }
         public float VehicleVelocity { get; }
     }
 }
