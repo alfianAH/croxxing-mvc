@@ -9,6 +9,8 @@ using System.Collections;
 using Croxxing.Module.Scene.Gameplay.Connector;
 using Croxxing.Module.Scene.Gameplay.GamePause;
 using Croxxing.Module.Scene.MainMenu.GameSettings;
+using Croxxing.Module.Scene.Gameplay.RoadPool;
+using Croxxing.Module.Scene.Gameplay.Road;
 
 namespace Croxxing.Scene.Gameplay
 {
@@ -20,6 +22,7 @@ namespace Croxxing.Scene.Gameplay
         private PlayerManagerController _playerManagerController;
         private GamePauseController _gamePauseController;
         private GameSettingsController _gameSettingsController;
+        private RoadPoolController _roadPoolController;
 
         protected override IController[] GetSceneDependencies()
         {
@@ -30,6 +33,8 @@ namespace Croxxing.Scene.Gameplay
                 new PlayerManagerController(),
                 new GamePauseController(),
                 new GameSettingsController(),
+                new RoadController(),
+                new RoadPoolController(),
             };
         }
 
@@ -39,6 +44,7 @@ namespace Croxxing.Scene.Gameplay
             _playerManagerController.SetView(_view.playerManagerView);
             _gamePauseController.SetView(_view.gamePauseView);
             _gameSettingsController.SetView(_view.gameSettingsView);
+            _roadPoolController.SetView(_view.roadPoolView);
 
             yield return base.InitSceneObject();
         }
