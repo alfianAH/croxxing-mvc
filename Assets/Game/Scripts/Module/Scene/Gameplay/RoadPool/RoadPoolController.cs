@@ -56,7 +56,7 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             return road;
         }
 
-        private RoadController GetOrCreateRoad(RoadType roadType, Vector3 position)
+        private RoadController GetOrCreateRoad(RoadType roadType, Vector3 position, RoadLane roadLane)
         {
             RoadController road = _model.RoadPool.Find(r => !r.Model.IsCurrentlyActive && r.Model.Type == roadType);
 
@@ -65,9 +65,8 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
                 road = AddRoad(roadType);
                 _model.AddRoadPool(road);
             }
-            
-            road.SetPosition(position);
-            road.SetCurrentlyActive(true);
+
+            road.SetRoadProperties(true, position, roadLane);
             return road;
         }
     
@@ -75,14 +74,14 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
         {
             // Add sidewalk on the first
             Vector3 firstLane = new Vector3(0, -4, 0);
-            GetOrCreateRoad(RoadType.Sidewalk, firstLane);
+            GetOrCreateRoad(RoadType.Sidewalk, firstLane, RoadLane.First);
 
             // Add 5 random roads
             SpawnRandomRoad();
 
             // Add sidewalk on the last
             Vector3 lastLane = new Vector3(0, -4 + (_model.PoolSize - 1)*_model.RoadHeight, 0);
-            GetOrCreateRoad(RoadType.Sidewalk, lastLane);
+            GetOrCreateRoad(RoadType.Sidewalk, lastLane, RoadLane.Last);
         }
 
         private void SpawnRandomRoad()
@@ -100,18 +99,18 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
                 {
                     case 0:
                         // Normal Road
-                        currentRoad = GetOrCreateRoad(RoadType.Normal, position);
+                        currentRoad = GetOrCreateRoad(RoadType.Normal, position, RoadLane.Middle);
                         break;
 
                     case 1:
                         // Sidewalk road
                         if (sidewalkRoadCount == _model.MaxSidewalkNumber)
                         {
-                            currentRoad = GetOrCreateRoad(RoadType.Normal, position);
+                            currentRoad = GetOrCreateRoad(RoadType.Normal, position, RoadLane.Middle);
                         }
                         else
                         {
-                            currentRoad = GetOrCreateRoad(RoadType.Sidewalk, position);
+                            currentRoad = GetOrCreateRoad(RoadType.Sidewalk, position, RoadLane.Middle);
                             sidewalkRoadCount++;
                         }
                         break;

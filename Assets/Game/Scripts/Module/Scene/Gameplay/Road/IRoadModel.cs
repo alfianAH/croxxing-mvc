@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.Road
 {
+    public enum RoadLane
+    {
+        First, Middle, Last
+    }
+
     public enum RoadType
     {
         Normal, Sidewalk
@@ -17,7 +22,9 @@ namespace Croxxing.Module.Scene.Gameplay.Road
     {
         public RoadType Type { get; }
         public RoadStartingSpawn StartingSpawn { get; }
+        public RoadLane Lane { get; }
         public Vector3 Position { get; }
+        public bool IsPlayerOnRoad { get; }
         public bool IsCurrentlyActive { get; }
         public float VehicleVelocity { get; }
     }

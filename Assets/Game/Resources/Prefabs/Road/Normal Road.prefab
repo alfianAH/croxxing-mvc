@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 5252048334204774306}
   - component: {fileID: 5252048334204774316}
   - component: {fileID: 5252048334204774307}
+  - component: {fileID: 5902946710697813473}
   m_Layer: 0
   m_Name: Normal Road
   m_TagString: Untagged
@@ -135,6 +136,32 @@ MonoBehaviour:
   _sidewalkRoadSprite: {fileID: 0}
   _spawner: {fileID: 5252048334453278736}
   _despawner: {fileID: 5252048335616709638}
+--- !u!61 &5902946710697813473
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5252048334204774305}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &5252048334453278736
 GameObject:
   m_ObjectHideFlags: 0

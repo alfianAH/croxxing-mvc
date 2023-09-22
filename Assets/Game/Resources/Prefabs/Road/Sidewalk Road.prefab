@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3106767401522994882}
   - component: {fileID: 4475658617563164540}
   - component: {fileID: 8303120272485349326}
+  - component: {fileID: 1878975152676030901}
   m_Layer: 0
   m_Name: Sidewalk Road
   m_TagString: Untagged
@@ -105,6 +106,32 @@ MonoBehaviour:
   _sidewalkRoadSprite: {fileID: 0}
   _spawner: {fileID: 7341558824735317481}
   _despawner: {fileID: 4575867331055282651}
+--- !u!61 &1878975152676030901
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882347279617425061}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1802991706791810179
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,15 +12,23 @@ namespace Croxxing.Module.Scene.Gameplay.Road
             SetView(view);
         }
 
-        public void SetCurrentlyActive(bool isActive)
+        public override void SetView(RoadView view)
         {
-            _model.SetCurrentlyActive(isActive);
-            _view.gameObject.SetActive(isActive);
+            base.SetView(view);
+            view.SetCallbacks(OnPlayerEnterRandomRoad);
         }
 
-        public void SetPosition(Vector3 position)
+        public void SetRoadProperties(bool isActive, Vector3 position, RoadLane roadLane)
         {
+            _model.SetCurrentlyActive(isActive);
             _model.SetPosition(position);
+            _model.SetRoadLane(roadLane);
+        }
+
+        private void OnPlayerEnterRandomRoad()
+        {
+            _model.SetIsPlayerOnRoad(true);
+            // Add score and distance
         }
     }
 }
