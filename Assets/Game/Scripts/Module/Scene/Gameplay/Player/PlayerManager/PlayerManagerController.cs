@@ -8,7 +8,7 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerManager
     public class PlayerManagerController: ObjectController<PlayerManagerController, PlayerManagerModel, IPlayerManagerModel, PlayerManagerView>
     {
         private Vector2 _rawInputMovement;
-        private const float PLAYER_SPEED = 10F;
+        private const float PLAYER_SPEED = 6.5F;
 
         public override IEnumerator Initialize()
         {
