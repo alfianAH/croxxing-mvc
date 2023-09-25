@@ -26,6 +26,12 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             return yAxis;
         }
 
+        public void PlayerOnLastRoad()
+        {
+            DespawnRandomRoad();
+            SpawnRandomRoad();
+        }
+
         private void InitPoolObject()
         {
             for(int i = 0; i < _model.PoolSize; i++)
@@ -75,7 +81,8 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
                 _model.AddRoadPool(road);
             }
 
-            road.SetRoadProperties(true, position, roadLane);
+            road.SetRoadProperties(position, roadLane);
+            road.SetRoadActive(true);
             return road;
         }
     
@@ -130,6 +137,15 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
                     _model.AddCurrentActiveRoad(currentRoad);
                 }
             }
+        }
+
+        private void DespawnRandomRoad()
+        {
+            foreach(RoadController road in _model.CurrentActiveRoad)
+            {
+                road.SetRoadActive(false);
+            }
+            _model.CurrentActiveRoad.Clear();
         }
     }
 }

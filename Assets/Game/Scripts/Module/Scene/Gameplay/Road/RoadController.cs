@@ -22,11 +22,15 @@ namespace Croxxing.Module.Scene.Gameplay.Road
             view.SetCallbacks(OnPlayerEnterRandomRoad, OnPlayerEnterLastRoad);
         }
 
-        public void SetRoadProperties(bool isActive, Vector3 position, RoadLane roadLane)
+        public void SetRoadProperties(Vector3 position, RoadLane roadLane)
         {
-            _model.SetCurrentlyActive(isActive);
             _model.SetPosition(position);
             _model.SetRoadLane(roadLane);
+        }
+
+        public void SetRoadActive(bool isActive)
+        {
+            _model.SetCurrentlyActive(isActive);
         }
 
         private void OnPlayerEnterRandomRoad()
