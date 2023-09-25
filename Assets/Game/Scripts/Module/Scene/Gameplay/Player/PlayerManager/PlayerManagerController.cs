@@ -27,6 +27,11 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerManager
             _rawInputMovement = message.InputAxis;
         }
 
+        public void UpdatePositionOnLastRoad(PlayerOnLastRoadMessage message)
+        {
+            _view.PlayerTransform.position = new Vector3(message.ResetPosition.x, message.ResetPosition.y);
+        }
+
         private void MoveThePlayer()
         {
             Vector2 playerPosition = _view.PlayerTransform.position;

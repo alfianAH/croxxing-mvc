@@ -10,11 +10,13 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerManager
         protected override void Connect()
         {
             Subscribe<PlayerMovementMessage>(_playerManagerController.UpdateMovement);
+            Subscribe<PlayerOnLastRoadMessage>(_playerManagerController.UpdatePositionOnLastRoad);
         }
 
         protected override void Disconnect()
         {
             Unsubscribe<PlayerMovementMessage>(_playerManagerController.UpdateMovement);
+            Unsubscribe<PlayerOnLastRoadMessage>(_playerManagerController.UpdatePositionOnLastRoad);
         }
     }
 }

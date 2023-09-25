@@ -18,6 +18,14 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             _model.SetIsPlaying(true);
         }
 
+        public float GetFirstLaneYAxis()
+        {
+            RoadController road = _model.RoadPool.Find(r => r.Model.Lane == RoadLane.First);
+            float yAxis = road.Model.Position.y;
+
+            return yAxis;
+        }
+
         private void InitPoolObject()
         {
             for(int i = 0; i < _model.PoolSize; i++)
@@ -49,6 +57,7 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             GameObject roadObject = Object.Instantiate(roadObjectPrefab, _view.transform);
             RoadView roadView = roadObject.GetComponent<RoadView>();
             RoadController road = new RoadController();
+            InjectDependencies(road);
 
             road.Init(roadModel, roadView);
             _model.AddRoadPool(road);

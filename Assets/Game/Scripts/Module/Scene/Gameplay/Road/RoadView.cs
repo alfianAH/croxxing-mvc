@@ -20,10 +20,12 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         [SerializeField] private GameObject _despawner;
 
         private Action _onPlayerEnterRandomRoad;
+        private Action<float> _onPlayerEnterLastRoad;
 
-        public void SetCallbacks(Action onPlayerEnterRandomRoad)
+        public void SetCallbacks(Action onPlayerEnterRandomRoad, Action<float> onPlayerEnterLastRound)
         {
             _onPlayerEnterRandomRoad = onPlayerEnterRandomRoad;
+            _onPlayerEnterLastRoad = onPlayerEnterLastRound;
         }
 
         private void Start()
@@ -45,7 +47,7 @@ namespace Croxxing.Module.Scene.Gameplay.Road
                         break;
 
                     case RoadLane.Last:
-                        Debug.Log("hai");
+                        _onPlayerEnterLastRoad.Invoke(other.transform.position.x);
                         break;
 
                     case RoadLane.First:
