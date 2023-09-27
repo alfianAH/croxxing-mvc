@@ -83,6 +83,7 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
 
             road.SetRoadProperties(position, roadLane);
             road.SetRoadActive(true);
+            road.SetStartingSpawn();
             return road;
         }
     

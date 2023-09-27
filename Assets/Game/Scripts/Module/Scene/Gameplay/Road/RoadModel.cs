@@ -9,6 +9,8 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         public RoadStartingSpawn StartingSpawn { get; private set; }
         public RoadLane Lane { get; private set; }
         public Vector3 Position { get; private set; }
+        public Vector3 SpawnerPosition { get; private set; }
+        public Vector3 DespawnerPosition { get; private set; }
         public bool IsPlayerOnRoad { get; private set; }
         public bool IsRandom { get; private set; } = true;
         public bool IsCurrentlyActive { get; private set; } = false;
@@ -55,6 +57,13 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         public void SetPosition(Vector3 position)
         {
             Position = position;
+            SetDataAsDirty();
+        }
+
+        public void SetSpawnerAndDespawnerPosition(Vector3 spawnerPosition, Vector3 despawnerPosition)
+        {
+            SpawnerPosition = spawnerPosition;
+            DespawnerPosition = despawnerPosition;
             SetDataAsDirty();
         }
     }
