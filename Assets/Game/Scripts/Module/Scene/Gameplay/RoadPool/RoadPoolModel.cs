@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Croxxing.Module.Scene.Gameplay.RoadPool
 {
-    public class RoadPoolModel : BaseModel, IRoadPoolModel
+    public class RoadPoolModel : BaseModel
     {
         public bool IsPlaying { get; private set; } = false;
         public float RoadHeight { get; private set; } = 1.2f;

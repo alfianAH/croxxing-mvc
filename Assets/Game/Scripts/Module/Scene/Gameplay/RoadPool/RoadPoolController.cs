@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.RoadPool
 {
-    public class RoadPoolController: ObjectController<RoadPoolController, RoadPoolModel, IRoadPoolModel, RoadPoolView>
+    public class RoadPoolController: ObjectController<RoadPoolController, RoadPoolModel, RoadPoolView>
     {
         public override void SetView(RoadPoolView view)
         {
