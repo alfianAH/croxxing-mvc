@@ -1,8 +1,8 @@
-﻿using Agate.MVC.Base;
+using Agate.MVC.Base;
 
-namespace Croxxing.Module.Scene.Gameplay.StartCountdown
+namespace Croxxing.Module.Scene.Gameplay.Timer
 {
-    public interface IStartCountdownModel: IBaseModel
+    public interface ITimerModel : IBaseModel
     {
         public long Remaining { get; }
         public float Progress { get; }
