@@ -12,5 +12,6 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
     {
         public VehicleType Type { get; }
         public Vector3 Position { get; }
+        public bool IsCurrentlyActive { get; }
     }
 }

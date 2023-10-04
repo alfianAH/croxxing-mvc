@@ -11,7 +11,9 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
         public Vector3 Position { get ; private set; }
         public bool IsCurrentlyActive { get; private set; } = false;
 
-        public void SetVehicleType(VehicleType type)
+        public VehicleModel() { }
+
+        public VehicleModel(VehicleType type)
         {
             Type = type;
             SetDataAsDirty();

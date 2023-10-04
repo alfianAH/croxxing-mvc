@@ -1,4 +1,5 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Scene.Gameplay.Road;
 using Croxxing.Module.Scene.Gameplay.RoadPool;
 using UnityEngine;
 
@@ -21,6 +22,17 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
             view.SetCallbacks(OnUpdate);
         }
 
+        public void SetVehicleProperties(RoadController road)
+        {
+            _model.SetPosition(road.Model.SpawnerPosition);
+            _model.SetRoad(road);
+        }
+
+        public void SetVehicleActive(bool isActive)
+        {
+            _model.SetCurrentlyActive(isActive);
+        }
+
         private void OnUpdate()
         {
             if (!_roadPoolController.Model.IsPlaying) return;
@@ -29,12 +41,12 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
 
             switch (_model.Road.Model.StartingSpawn)
             {
-                case Road.RoadStartingSpawn.Left:
+                case RoadStartingSpawn.Left:
                     // Move to right
                     position += speed * Time.deltaTime * Vector3.right;
                     break;
 
-                case Road.RoadStartingSpawn.Right:
+                case RoadStartingSpawn.Right:
                     // Move to left
                     position += speed * Time.deltaTime * Vector3.left;
                     break;

@@ -33,14 +33,19 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
             }
         }
 
+        private void UpdateVehicle(IVehicleModel model)
+        {
+            gameObject.SetActive(_model.IsCurrentlyActive);
+        }
+
         protected override void InitRenderModel(IVehicleModel model)
         {
-            
+            UpdateVehicle(model);
         }
 
         protected override void UpdateRenderModel(IVehicleModel model)
         {
-            
+            UpdateVehicle(model);
         }
     }
 }
