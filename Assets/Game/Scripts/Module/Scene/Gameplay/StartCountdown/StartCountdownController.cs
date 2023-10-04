@@ -1,6 +1,6 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Message;
-using System;
+using Croxxing.Utility;
 using System.Collections;
 
 namespace Croxxing.Module.Scene.Gameplay.StartCountdown
@@ -23,22 +23,17 @@ namespace Croxxing.Module.Scene.Gameplay.StartCountdown
 
         private void StartTimer()
         {
-            _model.Timer.StartCountdown(GetCurrentTime());
+            _model.Timer.StartCountdown(GameUtils.GetCurrentTime());
         }
 
         private void TickTimer()
         {
-            long currentTime = GetCurrentTime();
+            long currentTime = GameUtils.GetCurrentTime();
             _model.Timer.UpdateCountdown(currentTime);
             if (_model.Timer.IsCompleted)
             {
                 Publish(new StartPlayMessage());
             }
-        }
-
-        private long GetCurrentTime()
-        {
-            return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
     }
 }

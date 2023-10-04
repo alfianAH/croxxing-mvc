@@ -1,6 +1,5 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Scene.Gameplay.Timer;
-using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.StartCountdown
 {
