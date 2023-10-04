@@ -1,4 +1,5 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Scene.Gameplay.Timer;
 using System;
 using UnityEngine;
 
@@ -20,24 +21,17 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         [SerializeField] private GameObject _despawner;
 
         private Action _onPlayerEnterRandomRoad;
-        private Action _onUpdate;
         private Action<float> _onPlayerEnterLastRoad;
 
-        public void SetCallbacks(Action onPlayerEnterRandomRoad, Action<float> onPlayerEnterLastRound, Action onUpdate)
+        public void SetCallbacks(Action onPlayerEnterRandomRoad, Action<float> onPlayerEnterLastRound)
         {
             _onPlayerEnterRandomRoad = onPlayerEnterRandomRoad;
             _onPlayerEnterLastRoad = onPlayerEnterLastRound;
-            _onUpdate = onUpdate;
         }
 
         private void Start()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
-        }
-
-        private void Update()
-        {
-            _onUpdate?.Invoke();
         }
 
         private void OnTriggerEnter2D(Collider2D other)

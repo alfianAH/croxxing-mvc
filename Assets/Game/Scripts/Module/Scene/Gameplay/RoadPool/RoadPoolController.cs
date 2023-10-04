@@ -1,5 +1,6 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Scene.Gameplay.Road;
+using Croxxing.Module.Scene.Gameplay.Timer;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.RoadPool
@@ -62,10 +63,12 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             GameObject roadObjectPrefab = Resources.Load<GameObject>($"Prefabs/Road/{prefabName}");
             GameObject roadObject = Object.Instantiate(roadObjectPrefab, _view.transform);
             RoadView roadView = roadObject.GetComponent<RoadView>();
+            TimerView timerView = roadObject.GetComponent<TimerView>();
+
             RoadController road = new RoadController();
             InjectDependencies(road);
 
-            road.Init(roadModel, roadView);
+            road.Init(roadModel, roadView, timerView);
             _model.AddRoadPool(road);
 
             return road;
@@ -84,7 +87,7 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             road.SetRoadProperties(position, roadLane);
             road.SetRoadActive(true);
             road.SetStartingSpawn();
-            road.SetSpawnRange();
+
             return road;
         }
     

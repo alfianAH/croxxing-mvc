@@ -13,6 +13,33 @@ namespace Croxxing.Module.Scene.Gameplay.VehiclePool
             InitPoolObject();
         }
 
+        public void SpawnVehicleOnRoad(RoadController road)
+        {
+            int randomNumber = Random.Range(0, 4);
+            VehicleController vehicle = null;
+
+            switch (randomNumber)
+            {
+                case 0:
+                    vehicle = GetOrCreateVehicle(VehicleType.Long);
+                    break;
+
+                case 1:
+                    vehicle = GetOrCreateVehicle(VehicleType.Medium);
+                    break;
+
+                case 2:
+                    vehicle = GetOrCreateVehicle(VehicleType.Short);
+                    break;
+
+                case 3:
+                    vehicle = GetOrCreateVehicle(VehicleType.Coin);
+                    break;
+            }
+
+            vehicle.SetVehicleProperties(road);
+        }
+
         private void InitPoolObject()
         {
             for (int i = 0; i < _model.PoolSize; i++)
@@ -38,15 +65,15 @@ namespace Croxxing.Module.Scene.Gameplay.VehiclePool
             switch (vehicleType)
             {
                 case VehicleType.Long:
-                    prefabName = "Long Road";
+                    prefabName = "Long Vehicle";
                     break;
 
                 case VehicleType.Medium:
-                    prefabName = "Medium Road";
+                    prefabName = "Medium Vehicle";
                     break;
 
                 case VehicleType.Short:
-                    prefabName = "Short Road";
+                    prefabName = "Short Vehicle";
                     break;
 
                 case VehicleType.Coin:
@@ -79,33 +106,6 @@ namespace Croxxing.Module.Scene.Gameplay.VehiclePool
             vehicle.SetVehicleActive(true);
             
             return vehicle;
-        }
-
-        private void SpawnVehicleOnRoad(RoadController road)
-        {
-            int randomNumber = Random.Range(0, 4);
-            VehicleController vehicle = null;
-
-            switch (randomNumber)
-            {
-                case 0:
-                    vehicle = GetOrCreateVehicle(VehicleType.Long);
-                    break;
-
-                case 1:
-                    vehicle = GetOrCreateVehicle(VehicleType.Medium);
-                    break;
-
-                case 2:
-                    vehicle = GetOrCreateVehicle(VehicleType.Short);
-                    break;
-
-                case 3:
-                    vehicle = GetOrCreateVehicle(VehicleType.Coin);
-                    break;
-            }
-
-            vehicle.SetVehicleProperties(road);
         }
     }
 }

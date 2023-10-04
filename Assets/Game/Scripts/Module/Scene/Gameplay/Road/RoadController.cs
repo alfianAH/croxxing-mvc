@@ -1,6 +1,9 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Message;
 using Croxxing.Module.Scene.Gameplay.RoadPool;
+using Croxxing.Module.Scene.Gameplay.Timer;
+using Croxxing.Module.Scene.Gameplay.VehiclePool;
+using Croxxing.Utility;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.Road
@@ -8,18 +11,24 @@ namespace Croxxing.Module.Scene.Gameplay.Road
     public class RoadController: ObjectController<RoadController, RoadModel, IRoadModel, RoadView>
     {
         private RoadPoolController _roadPoolController;
+        private VehiclePoolController _vehiclePoolController;
 
-        public void Init(RoadModel model, RoadView view)
+        public void Init(RoadModel model, RoadView view, TimerView timer)
         {
             _model = model;
             _view = view;
             SetView(view);
+
+            SetSpawnRange();
+            timer.SetModel(_model.Timer);
+            timer.Init(TickTimer);
+            StartTimer();
         }
 
         public override void SetView(RoadView view)
         {
             base.SetView(view);
-            view.SetCallbacks(OnPlayerEnterRandomRoad, OnPlayerEnterLastRoad, OnUpdate);
+            view.SetCallbacks(OnPlayerEnterRandomRoad, OnPlayerEnterLastRoad);
         }
 
         public void SetRoadProperties(Vector3 position, RoadLane roadLane)
@@ -63,7 +72,34 @@ namespace Croxxing.Module.Scene.Gameplay.Road
 
         public void SetSpawnRange()
         {
+            if(_model.Type == RoadType.Sidewalk) return;
+
             _model.SetSpawnRange(Random.Range(2, 5));
+            _model.SetTimer(_model.SpawnRange);
+        }
+
+        private void StartTimer()
+        {
+            if (_model.Type == RoadType.Sidewalk) return;
+
+            _model.Timer.StartCountdown(GameUtils.GetCurrentTime());
+        }
+
+        private void TickTimer()
+        {
+            if (_model.Type == RoadType.Sidewalk) return;
+
+            long currentTime = GameUtils.GetCurrentTime();
+            _model.Timer.UpdateCountdown(currentTime);
+
+            if (_model.Timer.IsCompleted)
+            {
+                // Spawn vehicle
+                _vehiclePoolController.SpawnVehicleOnRoad(this);
+
+                // Restart time
+                _model.Timer.StartCountdown(currentTime);
+            }
         }
 
         private void OnPlayerEnterRandomRoad()
@@ -76,12 +112,6 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         {
             Vector2 resetPosition = new Vector2(xAxis, _roadPoolController.GetFirstLaneYAxis());
             Publish(new PlayerOnLastRoadMessage(resetPosition));
-        }
-
-        private void OnUpdate()
-        {
-            if (!_roadPoolController.Model.IsPlaying) return;
-
         }
     }
 }

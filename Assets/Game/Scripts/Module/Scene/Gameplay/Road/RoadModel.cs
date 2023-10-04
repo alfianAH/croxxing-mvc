@@ -1,4 +1,5 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Scene.Gameplay.Timer;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.Road
@@ -8,13 +9,14 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         public RoadType Type { get; private set; }
         public RoadStartingSpawn StartingSpawn { get; private set; }
         public RoadLane Lane { get; private set; }
+        public TimerModel Timer { get; private set; }
         public Vector3 Position { get; private set; }
         public Vector3 SpawnerPosition { get; private set; }
         public Vector3 DespawnerPosition { get; private set; }
         public bool IsPlayerOnRoad { get; private set; }
         public bool IsRandom { get; private set; } = true;
         public bool IsCurrentlyActive { get; private set; } = false;
-        public float SpawnRange { get; private set; }
+        public int SpawnRange { get; private set; }
         public float VehicleVelocity { get; private set; }
 
         public RoadModel () { }
@@ -68,9 +70,15 @@ namespace Croxxing.Module.Scene.Gameplay.Road
             SetDataAsDirty();
         }
 
-        public void SetSpawnRange(float spawnRange)
+        public void SetSpawnRange(int spawnRange)
         {
             SpawnRange = spawnRange;
+            SetDataAsDirty();
+        }
+
+        public void SetTimer(int second)
+        {
+            Timer = new TimerModel(second);
             SetDataAsDirty();
         }
     }

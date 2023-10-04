@@ -19,6 +19,12 @@ namespace Croxxing.Module.Scene.Gameplay.Timer
             Duration = second * 1000;
         }
 
+        public void SetDuration(int second)
+        {
+            Duration = second * 1000;
+            SetDataAsDirty();
+        }
+
         public void StartCountdown(long currentTime)
         {
             StartTime = currentTime;

@@ -3,6 +3,7 @@ using Croxxing.Module.Scene.Gameplay.GamePause;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerManager;
 using Croxxing.Module.Scene.Gameplay.RoadPool;
 using Croxxing.Module.Scene.Gameplay.StartCountdown;
+using Croxxing.Module.Scene.Gameplay.VehiclePool;
 using Croxxing.Module.Scene.MainMenu.GameSettings;
 
 namespace Croxxing.Scene.Gameplay
@@ -14,5 +15,6 @@ namespace Croxxing.Scene.Gameplay
         public GamePauseView gamePauseView;
         public GameSettingsView gameSettingsView;
         public RoadPoolView roadPoolView;
+        public VehiclePoolView vehiclePoolView;
     }
 }
