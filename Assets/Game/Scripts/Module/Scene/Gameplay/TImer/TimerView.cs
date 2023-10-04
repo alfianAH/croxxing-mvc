@@ -14,11 +14,11 @@ namespace Croxxing.Module.Scene.Gameplay.Timer
         private Action _onUpdate;
         private Action _onStopTimer;
 
-        public void Init(Action onUpdate, Action onInit, Action onStopTimer)
+        public void Init(Action onUpdate, Action onInit = null, Action onStopTimer = null)
         {
             _onUpdate = onUpdate;
             _onStopTimer = onStopTimer;
-            onInit.Invoke();
+            onInit?.Invoke();
         }
 
         private void Update()
@@ -35,7 +35,7 @@ namespace Croxxing.Module.Scene.Gameplay.Timer
         {
             yield return new WaitUntil(() => _model.IsCompleted);
             _onUpdate = null;
-            _onStopTimer.Invoke();
+            _onStopTimer?.Invoke();
         }
 
         protected override void InitRenderModel(ITimerModel model) { }
