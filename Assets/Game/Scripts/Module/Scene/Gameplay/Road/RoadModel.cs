@@ -14,6 +14,7 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         public bool IsPlayerOnRoad { get; private set; }
         public bool IsRandom { get; private set; } = true;
         public bool IsCurrentlyActive { get; private set; } = false;
+        public float SpawnRange { get; private set; }
         public float VehicleVelocity { get; private set; }
 
         public RoadModel () { }
@@ -64,6 +65,12 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         {
             SpawnerPosition = spawnerPosition;
             DespawnerPosition = despawnerPosition;
+            SetDataAsDirty();
+        }
+
+        public void SetSpawnRange(float spawnRange)
+        {
+            SpawnRange = spawnRange;
             SetDataAsDirty();
         }
     }

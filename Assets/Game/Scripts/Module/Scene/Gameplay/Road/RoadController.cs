@@ -19,7 +19,7 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         public override void SetView(RoadView view)
         {
             base.SetView(view);
-            view.SetCallbacks(OnPlayerEnterRandomRoad, OnPlayerEnterLastRoad);
+            view.SetCallbacks(OnPlayerEnterRandomRoad, OnPlayerEnterLastRoad, OnUpdate);
         }
 
         public void SetRoadProperties(Vector3 position, RoadLane roadLane)
@@ -61,6 +61,11 @@ namespace Croxxing.Module.Scene.Gameplay.Road
             }
         }
 
+        public void SetSpawnRange()
+        {
+            _model.SetSpawnRange(Random.Range(2, 5));
+        }
+
         private void OnPlayerEnterRandomRoad()
         {
             _model.SetIsPlayerOnRoad(true);
@@ -71,6 +76,12 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         {
             Vector2 resetPosition = new Vector2(xAxis, _roadPoolController.GetFirstLaneYAxis());
             Publish(new PlayerOnLastRoadMessage(resetPosition));
+        }
+
+        private void OnUpdate()
+        {
+            if (!_roadPoolController.Model.IsPlaying) return;
+
         }
     }
 }

@@ -28,6 +28,7 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         public Vector3 DespawnerPosition { get; }
         public bool IsPlayerOnRoad { get; }
         public bool IsCurrentlyActive { get; }
+        public float SpawnRange { get; }
         public float VehicleVelocity { get; }
     }
 }
