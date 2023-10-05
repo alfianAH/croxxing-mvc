@@ -35,7 +35,8 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
 
         private void UpdateVehicle(IVehicleModel model)
         {
-            gameObject.SetActive(_model.IsCurrentlyActive);
+            gameObject.SetActive(model.IsCurrentlyActive);
+            transform.position = model.Position;
         }
 
         protected override void InitRenderModel(IVehicleModel model)

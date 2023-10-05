@@ -1,6 +1,7 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Scene.Gameplay.Road;
 using Croxxing.Module.Scene.Gameplay.Vehicle;
+using System.Linq;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.VehiclePool
@@ -37,7 +38,15 @@ namespace Croxxing.Module.Scene.Gameplay.VehiclePool
                     break;
             }
 
+            vehicle.SetVehicleActive(true);
             vehicle.SetVehicleProperties(road);
+        }
+
+        public void PlayerOnLastRoad()
+        {
+            foreach(VehicleController vehicle in _model.VehiclePool.Where(v => v.Model.IsCurrentlyActive)){
+                vehicle.SetVehicleActive(false);
+            }
         }
 
         private void InitPoolObject()
@@ -102,8 +111,6 @@ namespace Croxxing.Module.Scene.Gameplay.VehiclePool
                 vehicle = AddVehicle(vehicleType);
                 _model.AddVehiclePool(vehicle);
             }
-
-            vehicle.SetVehicleActive(true);
             
             return vehicle;
         }

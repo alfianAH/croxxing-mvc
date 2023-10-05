@@ -3,6 +3,7 @@ using Croxxing.Module.Message;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerInput;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerManager;
 using Croxxing.Module.Scene.Gameplay.RoadPool;
+using Croxxing.Module.Scene.Gameplay.VehiclePool;
 
 namespace Croxxing.Module.Scene.Gameplay.Connector
 {
@@ -11,6 +12,7 @@ namespace Croxxing.Module.Scene.Gameplay.Connector
         private PlayerInputController _playerMovementController;
         private RoadPoolController _roadPoolController;
         private PlayerManagerController _playerManagerController;
+        private VehiclePoolController _vehiclePoolController;
 
         protected override void Connect()
         {
@@ -33,6 +35,7 @@ namespace Croxxing.Module.Scene.Gameplay.Connector
         private void PlayerOnLastRoad(PlayerOnLastRoadMessage message)
         {
             _playerManagerController.UpdatePositionOnLastRoad(message);
+            _vehiclePoolController.PlayerOnLastRoad();
             _roadPoolController.PlayerOnLastRoad();
         }
     }

@@ -37,7 +37,7 @@ namespace Croxxing.Module.Scene.Gameplay.Road
             _model.SetRoadLane(roadLane);
 
             // Set road velocity
-            float velocity = Random.Range(3, 10);
+            float velocity = Random.Range(3, 5);
             _model.SetVehicleVelocity(velocity);
         }
 
@@ -74,7 +74,7 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         {
             if(_model.Type == RoadType.Sidewalk) return;
 
-            _model.SetSpawnRange(Random.Range(2, 5));
+            _model.SetSpawnRange(Random.Range(1, 3));
             _model.SetTimer(_model.SpawnRange);
         }
 

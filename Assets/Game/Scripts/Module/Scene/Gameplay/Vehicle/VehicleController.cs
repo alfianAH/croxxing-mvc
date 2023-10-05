@@ -35,20 +35,27 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
 
         private void OnUpdate()
         {
-            if (!_roadPoolController.Model.IsPlaying) return;
             float speed = _model.Road.Model.VehicleVelocity;
-            Vector3 position = _model.Road.Model.SpawnerPosition;
+            Vector3 position = Vector3.zero;
 
             switch (_model.Road.Model.StartingSpawn)
             {
                 case RoadStartingSpawn.Left:
                     // Move to right
-                    position += speed * Time.deltaTime * Vector3.right;
+                    position = _model.Position + speed * Time.deltaTime * Vector3.right;
+
+                    if (_model.Position.x > _model.Road.Model.DespawnerPosition.x)
+                        _model.SetCurrentlyActive(false);
+                    
                     break;
 
                 case RoadStartingSpawn.Right:
                     // Move to left
-                    position += speed * Time.deltaTime * Vector3.left;
+                    position = _model.Position + speed * Time.deltaTime * Vector3.left;
+
+                    if (_model.Position.x < _model.Road.Model.DespawnerPosition.x)
+                        _model.SetCurrentlyActive(false);
+
                     break;
             }
 
