@@ -12,6 +12,7 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
         public int MaxSidewalkNumber { get; private set; } = 2;
         public List<RoadController> RoadPool { get; private set; } = new List<RoadController>();
         public List<RoadController> CurrentActiveRoad { get; private set; } = new List<RoadController>();
+        public List<RoadController> NextLevelRoad { get; private set; } = new List<RoadController>();
 
         public void SetIsPlaying(bool isPlaying)
         {
@@ -31,9 +32,21 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             SetDataAsDirty();
         }
 
+        public void AddNextLevelRoad(RoadController road)
+        {
+            NextLevelRoad.Add(road);
+            SetDataAsDirty();
+        }
+
         public void ResetCurrentActiveRoad()
         {
             CurrentActiveRoad.Clear();
+            SetDataAsDirty();
+        }
+
+        public void ResetNextLevelRoad()
+        {
+            NextLevelRoad.Clear();
             SetDataAsDirty();
         }
     }

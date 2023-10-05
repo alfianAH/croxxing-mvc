@@ -41,6 +41,16 @@ namespace Croxxing.Module.Scene.Gameplay.Road
             _model.SetVehicleVelocity(velocity);
         }
 
+        public void SetRoadInCurrentlyActivePool(bool isInCurrent)
+        {
+            _model.SetRoadInCurrentlyActivePool(isInCurrent);
+        }
+
+        public void UpdateRoadPosition(Vector3 position)
+        {
+            _model.SetPosition(position);
+        }
+
         public void SetRoadActive(bool isActive)
         {
             _model.SetCurrentlyActive(isActive);
@@ -95,7 +105,7 @@ namespace Croxxing.Module.Scene.Gameplay.Road
             if (_model.Timer.IsCompleted)
             {
                 // Spawn vehicle
-                _vehiclePoolController.SpawnVehicleOnRoad(this);
+                _vehiclePoolController.SpawnVehicleOnRoad(this, _model.IsRoadInCurrentlyActivePool);
 
                 // Restart time
                 _model.Timer.StartCountdown(currentTime);

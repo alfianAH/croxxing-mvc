@@ -1,7 +1,6 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Scene.Gameplay.Road;
 using Croxxing.Module.Scene.Gameplay.Vehicle;
-using System.Linq;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.VehiclePool
@@ -14,7 +13,7 @@ namespace Croxxing.Module.Scene.Gameplay.VehiclePool
             InitPoolObject();
         }
 
-        public void SpawnVehicleOnRoad(RoadController road)
+        public void SpawnVehicleOnRoad(RoadController road, bool isCurrent)
         {
             int randomNumber = Random.Range(0, 4);
             VehicleController vehicle = null;
@@ -40,13 +39,27 @@ namespace Croxxing.Module.Scene.Gameplay.VehiclePool
 
             vehicle.SetVehicleActive(true);
             vehicle.SetVehicleProperties(road);
+
+            if(isCurrent)
+                _model.AddCurrentActiveVehiclePool(vehicle);
+            else
+                _model.AddNextLevelVehiclePool(vehicle);
+        }
+
+        public void DespawnVehicle(VehicleController vehicle, bool isCurrent)
+        {
+            vehicle.SetVehicleActive(false);
+
+            if (isCurrent)
+                _model.RemoveCurrentActiveVehiclePool(vehicle);
+            else
+                _model.RemoveNextLevelVehiclePool(vehicle);
         }
 
         public void PlayerOnLastRoad()
         {
-            foreach(VehicleController vehicle in _model.VehiclePool.Where(v => v.Model.IsCurrentlyActive)){
-                vehicle.SetVehicleActive(false);
-            }
+            DespawnCurrentVehicle();
+            AddNextToCurrent();
         }
 
         private void InitPoolObject()
@@ -113,6 +126,25 @@ namespace Croxxing.Module.Scene.Gameplay.VehiclePool
             }
             
             return vehicle;
+        }
+        
+        private void DespawnCurrentVehicle()
+        {
+            foreach (VehicleController vehicle in _model.CurrentActiveVehicle)
+            {
+                vehicle.SetVehicleActive(false);
+            }
+            _model.ResetCurrentActiveVehiclePool();
+        }
+
+        private void AddNextToCurrent()
+        {
+            foreach (VehicleController vehicle in _model.NextLevelVehicle)
+            {
+                // Add vehicle to current
+                _model.AddCurrentActiveVehiclePool(vehicle);
+            }
+            _model.ResetNextLevelVehiclePool();
         }
     }
 }

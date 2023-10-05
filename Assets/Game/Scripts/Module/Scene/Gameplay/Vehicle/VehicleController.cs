@@ -1,13 +1,13 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Scene.Gameplay.Road;
-using Croxxing.Module.Scene.Gameplay.RoadPool;
+using Croxxing.Module.Scene.Gameplay.VehiclePool;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.Vehicle
 {
     public class VehicleController: ObjectController<VehicleController, VehicleModel, IVehicleModel, VehicleView>
     {
-        private RoadPoolController _roadPoolController;
+        private VehiclePoolController _vehiclePoolController;
 
         public void Init(VehicleModel model, VehicleView view)
         {
@@ -45,8 +45,9 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
                     position = _model.Position + speed * Time.deltaTime * Vector3.right;
 
                     if (_model.Position.x > _model.Road.Model.DespawnerPosition.x)
-                        _model.SetCurrentlyActive(false);
-                    
+                        _vehiclePoolController.DespawnVehicle(this, _model.Road.Model.IsRoadInCurrentlyActivePool);
+
+
                     break;
 
                 case RoadStartingSpawn.Right:
@@ -54,11 +55,12 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
                     position = _model.Position + speed * Time.deltaTime * Vector3.left;
 
                     if (_model.Position.x < _model.Road.Model.DespawnerPosition.x)
-                        _model.SetCurrentlyActive(false);
+                        _vehiclePoolController.DespawnVehicle(this, _model.Road.Model.IsRoadInCurrentlyActivePool);
 
                     break;
             }
 
+            position = new Vector3(position.x, _model.Road.Model.Position.y);
             _model.SetPosition(position);
         }
     }

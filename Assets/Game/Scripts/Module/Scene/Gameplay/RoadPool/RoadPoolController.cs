@@ -30,7 +30,8 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
         public void PlayerOnLastRoad()
         {
             DespawnRandomRoad();
-            SpawnRandomRoad();
+            AddNextToCurrent();
+            SpawnRandomRoad(10, false);
         }
 
         private void InitPoolObject()
@@ -98,20 +99,23 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             GetOrCreateRoad(RoadType.Sidewalk, firstLane, RoadLane.First);
 
             // Add 5 random roads
-            SpawnRandomRoad();
+            SpawnRandomRoad(-4, true);
+
+            // Add 5 next level roads
+            SpawnRandomRoad(10, false);
 
             // Add sidewalk on the last
             Vector3 lastLane = new Vector3(0, -4 + (_model.PoolSize - 1)*_model.RoadHeight, 0);
             GetOrCreateRoad(RoadType.Sidewalk, lastLane, RoadLane.Last);
         }
 
-        private void SpawnRandomRoad()
+        private void SpawnRandomRoad(float initY, bool isCurrent)
         {
             int sidewalkRoadCount = 0;
 
             for (int i = 1; i <= _model.PoolSize - 2; i++)
             {
-                Vector3 position = new Vector3(0, -4 + i * _model.RoadHeight, 0);
+                Vector3 position = new Vector3(0, initY + i * _model.RoadHeight, 0);
 
                 int randomNumber = Random.Range(0, 2);
                 RoadController currentRoad = null;
@@ -139,7 +143,12 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
 
                 if (currentRoad != null)
                 {
-                    _model.AddCurrentActiveRoad(currentRoad);
+                    if (isCurrent)
+                        _model.AddCurrentActiveRoad(currentRoad);
+                    else
+                        _model.AddNextLevelRoad(currentRoad);
+
+                    currentRoad.SetRoadInCurrentlyActivePool(isCurrent);
                 }
             }
         }
@@ -150,7 +159,20 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             {
                 road.SetRoadActive(false);
             }
-            _model.CurrentActiveRoad.Clear();
+            _model.ResetCurrentActiveRoad();
+        }
+
+        private void AddNextToCurrent()
+        {
+            int i = 1;
+            foreach (RoadController road in _model.NextLevelRoad)
+            {
+                Vector3 position = new Vector3(0, -4 + i * _model.RoadHeight, 0);
+                _model.AddCurrentActiveRoad(road);
+                road.UpdateRoadPosition(position);
+                i++;
+            }
+            _model.ResetNextLevelRoad();
         }
     }
 }
