@@ -1,6 +1,7 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Scene.Gameplay.Road;
 using Croxxing.Module.Scene.Gameplay.Timer;
+using Croxxing.Utility;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.RoadPool
@@ -118,8 +119,11 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             {
                 Vector3 position = new Vector3(0, initY + i * _model.RoadHeight, 0);
 
-                int randomNumber = Random.Range(0, 2);
-                RoadController currentRoad = null;
+                int randomNumber = CustomRandomizer.GetRandomValue(
+                    new RandomSelection(0, 0, 0.8f),
+                    new RandomSelection(1, 1, 0.2f)
+                );
+                RoadController currentRoad;
 
                 switch (randomNumber)
                 {
@@ -140,6 +144,9 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
                             sidewalkRoadCount++;
                         }
                         break;
+
+                    default:
+                        return;
                 }
 
                 if (currentRoad != null)

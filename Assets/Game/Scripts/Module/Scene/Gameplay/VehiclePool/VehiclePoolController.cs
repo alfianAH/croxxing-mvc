@@ -1,6 +1,7 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Scene.Gameplay.Road;
 using Croxxing.Module.Scene.Gameplay.Vehicle;
+using Croxxing.Utility;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.VehiclePool
@@ -15,8 +16,13 @@ namespace Croxxing.Module.Scene.Gameplay.VehiclePool
 
         public void SpawnVehicleOnRoad(RoadController road, bool isCurrent)
         {
-            int randomNumber = Random.Range(0, 4);
-            VehicleController vehicle = null;
+            int randomNumber = CustomRandomizer.GetRandomValue(
+                new RandomSelection(0, 0, 0.50f),
+                new RandomSelection(1, 1, 0.25f),
+                new RandomSelection(2, 2, 0.20f),
+                new RandomSelection(3, 3, 0.05f)
+            );
+            VehicleController vehicle;
 
             switch (randomNumber)
             {
@@ -35,6 +41,9 @@ namespace Croxxing.Module.Scene.Gameplay.VehiclePool
                 case 3:
                     vehicle = GetOrCreateVehicle(VehicleType.Coin);
                     break;
+
+                default:
+                    return;
             }
 
             vehicle.SetVehicleActive(true);
