@@ -13,16 +13,14 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         private RoadPoolController _roadPoolController;
         private VehiclePoolController _vehiclePoolController;
 
+        private TimerView _timerView;
+
         public void Init(RoadModel model, RoadView view, TimerView timer)
         {
             _model = model;
             _view = view;
             SetView(view);
-
-            SetSpawnRange();
-            timer.SetModel(_model.Timer);
-            timer.Init(TickTimer);
-            StartTimer();
+            _timerView = timer;
         }
 
         public override void SetView(RoadView view)
@@ -35,10 +33,6 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         {
             _model.SetPosition(position);
             _model.SetRoadLane(roadLane);
-
-            // Set road velocity
-            float velocity = Random.Range(3, 5);
-            _model.SetVehicleVelocity(velocity);
         }
 
         public void SetRoadInCurrentlyActivePool(bool isInCurrent)
@@ -104,8 +98,17 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         {
             if(_model.Type == RoadType.Sidewalk) return;
 
-            _model.SetSpawnRange(Random.Range(1, 3));
+            _model.SetSpawnRange(Random.Range(VehicleSpawnAndSpeed.MIN_SPAWN_TIME, VehicleSpawnAndSpeed.MAX_SPAWN_TIME));
+            
+            // Set road velocity
+            float velocity = VehicleSpawnAndSpeed.GetVehicleSpeed(_model.SpawnRange);
+            _model.SetVehicleVelocity(velocity);
+
             _model.SetTimer(_model.SpawnRange);
+
+            _timerView.SetModel(_model.Timer);
+            _timerView.Init(TickTimer);
+            StartTimer();
         }
 
         private void StartTimer()
