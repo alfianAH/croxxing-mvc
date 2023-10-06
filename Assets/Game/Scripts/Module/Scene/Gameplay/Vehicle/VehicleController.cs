@@ -47,7 +47,6 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
                     if (_model.Position.x > _model.Road.Model.DespawnerPosition.x)
                         _vehiclePoolController.DespawnVehicle(this, _model.Road.Model.IsRoadInCurrentlyActivePool);
 
-
                     break;
 
                 case RoadStartingSpawn.Right:

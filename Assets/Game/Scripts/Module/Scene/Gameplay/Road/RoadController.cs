@@ -49,6 +49,25 @@ namespace Croxxing.Module.Scene.Gameplay.Road
         public void UpdateRoadPosition(Vector3 position)
         {
             _model.SetPosition(position);
+            Vector3 spawnerPosition = Vector3.zero;
+            Vector3 despawnerPosition = Vector3.zero;
+
+            switch (_model.StartingSpawn)
+            {
+                case RoadStartingSpawn.Left:
+                    spawnerPosition = new Vector3(-9, _model.Position.y);
+                    despawnerPosition = new Vector3(9, _model.Position.y);
+
+                    break;
+
+                case RoadStartingSpawn.Right:
+                    spawnerPosition = new Vector3(9, _model.Position.y);
+                    despawnerPosition = new Vector3(-9, _model.Position.y);
+
+                    break;
+            }
+
+            _model.SetSpawnerAndDespawnerPosition(spawnerPosition, despawnerPosition);
         }
 
         public void SetRoadActive(bool isActive)
@@ -61,23 +80,24 @@ namespace Croxxing.Module.Scene.Gameplay.Road
             if (_model.Type == RoadType.Sidewalk) return;
 
             int randomNumber = Random.Range(0, 10);
+            Vector3 spawnerPosition;
+            Vector3 despawnerPosition;
 
-            if(randomNumber % 2 == 0)
+            if (randomNumber % 2 == 0)
             {
                 _model.SetRoadStartingSpawn(RoadStartingSpawn.Right);
 
-                Vector3 spawnerPosition = new Vector3(9, _model.Position.y);
-                Vector3 despawnerPosition = new Vector3(-9, _model.Position.y);
-                _model.SetSpawnerAndDespawnerPosition(spawnerPosition, despawnerPosition);
+                spawnerPosition = new Vector3(9, _model.Position.y);
+                despawnerPosition = new Vector3(-9, _model.Position.y);
             }
             else
             {
                 _model.SetRoadStartingSpawn(RoadStartingSpawn.Left);
 
-                Vector3 spawnerPosition = new Vector3(-9, _model.Position.y);
-                Vector3 despawnerPosition = new Vector3(9, _model.Position.y);
-                _model.SetSpawnerAndDespawnerPosition(spawnerPosition, despawnerPosition);
+                spawnerPosition = new Vector3(-9, _model.Position.y);
+                despawnerPosition = new Vector3(9, _model.Position.y);
             }
+            _model.SetSpawnerAndDespawnerPosition(spawnerPosition, despawnerPosition);
         }
 
         public void SetSpawnRange()
