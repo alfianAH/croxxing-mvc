@@ -8,6 +8,8 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
 {
     public class RoadPoolController: ObjectController<RoadPoolController, RoadPoolModel, IRoadPoolModel, RoadPoolView>
     {
+        private const float INIT_Y_POSITION = -4.5f;
+
         public override void SetView(RoadPoolView view)
         {
             base.SetView(view);
@@ -97,17 +99,17 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
         private void SpawnInitRoad()
         {
             // Add sidewalk on the first
-            Vector3 firstLane = new Vector3(0, -4, 0);
+            Vector3 firstLane = new Vector3(0, INIT_Y_POSITION, 0);
             GetOrCreateRoad(RoadType.Sidewalk, firstLane, RoadLane.First);
 
             // Add 5 random roads
-            SpawnRandomRoad(-4, true);
+            SpawnRandomRoad(INIT_Y_POSITION, true);
 
             // Add 5 next level roads
             SpawnRandomRoad(10, false);
 
             // Add sidewalk on the last
-            Vector3 lastLane = new Vector3(0, -4 + (_model.PoolSize - 1)*_model.RoadHeight, 0);
+            Vector3 lastLane = new Vector3(0, INIT_Y_POSITION + (_model.PoolSize - 1)*_model.RoadHeight, 0);
             GetOrCreateRoad(RoadType.Sidewalk, lastLane, RoadLane.Last);
         }
 
@@ -175,7 +177,7 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             int i = 1;
             foreach (RoadController road in _model.NextLevelRoad)
             {
-                Vector3 position = new Vector3(0, -4 + i * _model.RoadHeight, 0);
+                Vector3 position = new Vector3(0, INIT_Y_POSITION + i * _model.RoadHeight, 0);
                 _model.AddCurrentActiveRoad(road);
                 road.UpdateRoadPosition(position);
                 i++;
