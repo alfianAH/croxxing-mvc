@@ -12,6 +12,7 @@ using Croxxing.Module.Scene.MainMenu.GameSettings;
 using Croxxing.Module.Scene.Gameplay.RoadPool;
 using Croxxing.Module.Scene.Gameplay.Road;
 using Croxxing.Module.Scene.Gameplay.VehiclePool;
+using Croxxing.Module.Scene.Gameplay.ScoreCalculator;
 
 namespace Croxxing.Scene.Gameplay
 {
@@ -37,6 +38,7 @@ namespace Croxxing.Scene.Gameplay
                 new GameSettingsController(),
                 new RoadPoolController(),
                 new VehiclePoolController(),
+                new ScoreCalculatorController(),
             };
         }
 
@@ -60,6 +62,7 @@ namespace Croxxing.Scene.Gameplay
                 new StartCountdownConnector(),
                 new PlayerManagerConnector(),
                 new GamePauseConnector(),
+                new ScoreCalculatorConnector(),
             };
         }
     }

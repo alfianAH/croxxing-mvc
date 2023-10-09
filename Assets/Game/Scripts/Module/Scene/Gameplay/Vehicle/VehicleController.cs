@@ -1,5 +1,7 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Message;
 using Croxxing.Module.Scene.Gameplay.Road;
+using Croxxing.Module.Scene.Gameplay.ScoreCalculator;
 using Croxxing.Module.Scene.Gameplay.VehiclePool;
 using UnityEngine;
 
@@ -8,6 +10,7 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
     public class VehicleController: ObjectController<VehicleController, VehicleModel, IVehicleModel, VehicleView>
     {
         private VehiclePoolController _vehiclePoolController;
+        private ScoreCalculatorController _scoreCalculatorController;
 
         public void Init(VehicleModel model, VehicleView view)
         {
@@ -19,7 +22,7 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
         public override void SetView(VehicleView view)
         {
             base.SetView(view);
-            view.SetCallbacks(OnUpdate);
+            view.SetCallbacks(OnUpdate, OnCollision);
         }
 
         public void SetVehicleProperties(RoadController road)
@@ -61,6 +64,20 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
 
             position = new Vector3(position.x, _model.Road.Model.Position.y);
             _model.SetPosition(position);
+        }
+        
+        private void OnCollision()
+        {
+            if (_model.Type == VehicleType.Coin)
+            {
+                Publish(new AddScoreMessage(10));
+                // Despawn vehicle
+                _vehiclePoolController.DespawnVehicle(this, _model.Road.Model.IsRoadInCurrentlyActivePool);
+            }
+            else
+            {
+                Debug.Log("Game over");
+            }
         }
     }
 }

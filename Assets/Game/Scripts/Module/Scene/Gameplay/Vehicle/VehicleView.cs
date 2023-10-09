@@ -7,10 +7,12 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
     public class VehicleView : ObjectView<IVehicleModel>
     {
         private Action _onUpdate;
+        private Action _onCollision;
 
-        public void SetCallbacks(Action OnUpdate)
+        public void SetCallbacks(Action OnUpdate, Action onCollision)
         {
             _onUpdate = OnUpdate;
+            _onCollision = onCollision;
         }
 
         private void FixedUpdate()
@@ -22,14 +24,7 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                if(_model.Type == VehicleType.Coin)
-                {
-                    Debug.Log("+10");
-                }
-                else
-                {
-                    Debug.Log("Game over");
-                }
+                _onCollision?.Invoke();
             }
         }
 
