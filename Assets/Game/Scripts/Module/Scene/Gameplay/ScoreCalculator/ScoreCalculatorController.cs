@@ -8,6 +8,7 @@ namespace Croxxing.Module.Scene.Gameplay.ScoreCalculator
         public void OnAddScore(AddScoreMessage message)
         {
             _model.AddScore(message.AdditionalScore);
+            Publish(new UpdateScoreMessage(_model.Score));
         }
     }
 }

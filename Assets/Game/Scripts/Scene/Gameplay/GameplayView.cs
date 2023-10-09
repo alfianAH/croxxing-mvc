@@ -1,5 +1,6 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Scene.Gameplay.GamePause;
+using Croxxing.Module.Scene.Gameplay.HUD;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerManager;
 using Croxxing.Module.Scene.Gameplay.RoadPool;
 using Croxxing.Module.Scene.Gameplay.StartCountdown;
@@ -16,5 +17,6 @@ namespace Croxxing.Scene.Gameplay
         public GameSettingsView gameSettingsView;
         public RoadPoolView roadPoolView;
         public VehiclePoolView vehiclePoolView;
+        public HUDView hudView;
     }
 }
