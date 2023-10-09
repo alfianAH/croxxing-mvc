@@ -69,6 +69,11 @@ namespace Croxxing.Module.Scene.Gameplay.Road
             _model.SetCurrentlyActive(isActive);
         }
 
+        public void SetIsPlayerOnRoad(bool isPlayerOnRoad)
+        {
+            _model.SetIsPlayerOnRoad(isPlayerOnRoad);
+        }
+
         public void SetStartingSpawn()
         {
             if (_model.Type == RoadType.Sidewalk) return;
@@ -137,8 +142,10 @@ namespace Croxxing.Module.Scene.Gameplay.Road
 
         private void OnPlayerEnterRandomRoad()
         {
-            _model.SetIsPlayerOnRoad(true);
+            SetIsPlayerOnRoad(true);
             // Add score and distance
+            Publish(new AddScoreMessage(5));
+            Publish(new AddDistanceMessage());
         }
 
         private void OnPlayerEnterLastRoad(float xAxis)

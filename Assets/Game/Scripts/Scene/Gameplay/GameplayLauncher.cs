@@ -14,6 +14,7 @@ using Croxxing.Module.Scene.Gameplay.Road;
 using Croxxing.Module.Scene.Gameplay.VehiclePool;
 using Croxxing.Module.Scene.Gameplay.ScoreCalculator;
 using Croxxing.Module.Scene.Gameplay.HUD;
+using Croxxing.Module.Scene.Gameplay.DistanceCalculator;
 
 namespace Croxxing.Scene.Gameplay
 {
@@ -42,6 +43,7 @@ namespace Croxxing.Scene.Gameplay
                 new VehiclePoolController(),
                 new ScoreCalculatorController(),
                 new HUDController(),
+                new DistanceCalculatorController(),
             };
         }
 
@@ -68,6 +70,7 @@ namespace Croxxing.Scene.Gameplay
                 new GamePauseConnector(),
                 new ScoreCalculatorConnector(),
                 new HUDConnector(),
+                new DistanceCalculatorConnector(),
             };
         }
     }

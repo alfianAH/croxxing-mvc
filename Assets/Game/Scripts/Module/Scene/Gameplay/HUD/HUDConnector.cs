@@ -10,11 +10,13 @@ namespace Croxxing.Module.Scene.Gameplay.HUD
         protected override void Connect()
         {
             Subscribe<UpdateScoreMessage>(_hudController.UpdateScore);
+            Subscribe<UpdateDistanceMessage>(_hudController.UpdateDistance);
         }
 
         protected override void Disconnect()
         {
             Unsubscribe<UpdateScoreMessage>(_hudController.UpdateScore);
+            Unsubscribe<UpdateDistanceMessage>(_hudController.UpdateDistance);
         }
     }
 }

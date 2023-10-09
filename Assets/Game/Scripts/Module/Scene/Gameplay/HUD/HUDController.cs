@@ -9,5 +9,10 @@ namespace Croxxing.Module.Scene.Gameplay.HUD
         {
             _model.SetScore(message.Score);
         }
+
+        public void UpdateDistance(UpdateDistanceMessage message)
+        {
+            _model.SetDistance(message.Distance);
+        }
     }
 }

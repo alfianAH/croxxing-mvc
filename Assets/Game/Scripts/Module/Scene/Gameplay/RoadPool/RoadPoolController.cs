@@ -168,6 +168,7 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             foreach(RoadController road in _model.CurrentActiveRoad)
             {
                 road.SetRoadActive(false);
+                road.SetIsPlayerOnRoad(false);
             }
             _model.ResetCurrentActiveRoad();
         }
