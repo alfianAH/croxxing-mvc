@@ -1,6 +1,7 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Message;
 using Croxxing.Module.Scene.Gameplay.GameOver;
+using Croxxing.Module.Scene.Gameplay.GamePause;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerInput;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerManager;
 using Croxxing.Module.Scene.Gameplay.RoadPool;
@@ -15,11 +16,14 @@ namespace Croxxing.Module.Scene.Gameplay.Connector
         private PlayerManagerController _playerManagerController;
         private VehiclePoolController _vehiclePoolController;
         private GameOverController _gameOverController;
+        private GamePauseController _gamePauseController;
 
         protected override void Connect()
         {
             Subscribe<StartPlayMessage>(OnStartPlay);
             Subscribe<PlayerOnLastRoadMessage>(PlayerOnLastRoad);
+            Subscribe<GamePausedMessage>(OnGamePause);
+            Subscribe<GameResumeMessage>(OnGameResume);
             Subscribe<GameOverMessage>(OnGameOver);
         }
 
@@ -27,6 +31,8 @@ namespace Croxxing.Module.Scene.Gameplay.Connector
         {
             Unsubscribe<StartPlayMessage>(OnStartPlay);
             Unsubscribe<PlayerOnLastRoadMessage>(PlayerOnLastRoad);
+            Unsubscribe<GamePausedMessage>(OnGamePause);
+            Unsubscribe<GameResumeMessage>(OnGameResume);
             Unsubscribe<GameOverMessage>(OnGameOver);
         }
 
@@ -45,8 +51,20 @@ namespace Croxxing.Module.Scene.Gameplay.Connector
         private void OnGameOver(GameOverMessage message)
         {
             _gameOverController.OnGameOver();
-            _roadPoolController.OnGameOver();
+            _roadPoolController.SetIsPlaying(false);
             _playerMovementController.OnGameOver();
+        }
+
+        private void OnGamePause(GamePausedMessage message)
+        {
+            _gamePauseController.OnGamePauseFromInput();
+            _roadPoolController.SetIsPlaying(false);
+        }
+
+        private void OnGameResume(GameResumeMessage message)
+        {
+            _gamePauseController.OnGameResumeFromInput();
+            _roadPoolController.SetIsPlaying(true);
         }
     }
 }

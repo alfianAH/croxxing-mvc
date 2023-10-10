@@ -12,12 +12,12 @@ namespace Croxxing.Module.Scene.Gameplay.GamePause
             view.SetCallbacks(OnGamePauseFromClick, OnGameResumeFromClick);
         }
 
-        public void OnGamePauseFromInput(GamePausedMessage message)
+        public void OnGamePauseFromInput()
         {
             OnPause();
         }
 
-        public void OnGameResumeFromInput(GameResumeMessage message)
+        public void OnGameResumeFromInput()
         {
             OnResume();
         }

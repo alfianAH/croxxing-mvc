@@ -70,7 +70,6 @@ namespace Croxxing.Scene.Gameplay
                 new GameplayConnector(),
                 new StartCountdownConnector(),
                 new PlayerManagerConnector(),
-                new GamePauseConnector(),
                 new ScoreCalculatorConnector(),
                 new HUDConnector(),
                 new DistanceCalculatorConnector(),
