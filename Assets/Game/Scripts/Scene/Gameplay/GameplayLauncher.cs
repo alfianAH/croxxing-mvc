@@ -10,7 +10,6 @@ using Croxxing.Module.Scene.Gameplay.Connector;
 using Croxxing.Module.Scene.Gameplay.GamePause;
 using Croxxing.Module.Scene.MainMenu.GameSettings;
 using Croxxing.Module.Scene.Gameplay.RoadPool;
-using Croxxing.Module.Scene.Gameplay.Road;
 using Croxxing.Module.Scene.Gameplay.VehiclePool;
 using Croxxing.Module.Scene.Gameplay.ScoreCalculator;
 using Croxxing.Module.Scene.Gameplay.HUD;

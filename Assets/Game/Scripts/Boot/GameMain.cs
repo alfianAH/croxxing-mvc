@@ -2,6 +2,7 @@ using System.Collections;
 using Agate.MVC.Base;
 using Agate.MVC.Core;
 using Croxxing.Module.Global.ControlsData;
+using Croxxing.Module.Global.ProgressData;
 
 namespace Croxxing.Boot
 {
@@ -20,6 +21,7 @@ namespace Croxxing.Boot
             return new IController[] 
             {
                 new ControlsController(),
+                new ProgressDataController(),
             };
         }
 
