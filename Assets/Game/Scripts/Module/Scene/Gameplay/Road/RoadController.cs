@@ -125,6 +125,7 @@ namespace Croxxing.Module.Scene.Gameplay.Road
 
         private void TickTimer()
         {
+            if (!_roadPoolController.Model.IsPlaying) return;
             if (_model.Type == RoadType.Sidewalk) return;
 
             long currentTime = GameUtils.GetCurrentTime();

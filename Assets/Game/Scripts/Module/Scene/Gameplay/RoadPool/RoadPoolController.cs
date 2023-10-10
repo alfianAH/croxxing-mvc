@@ -15,11 +15,17 @@ namespace Croxxing.Module.Scene.Gameplay.RoadPool
             base.SetView(view);
             InitPoolObject();
             SpawnInitRoad();
+            OnStartPlay();
         }
 
-        public void OnStartPlay()
+        private void OnStartPlay()
         {
             _model.SetIsPlaying(true);
+        }
+
+        public void OnGameOver()
+        {
+            _model.SetIsPlaying(false);
         }
 
         public float GetFirstLaneYAxis()

@@ -1,7 +1,7 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Message;
 using Croxxing.Module.Scene.Gameplay.Road;
-using Croxxing.Module.Scene.Gameplay.ScoreCalculator;
+using Croxxing.Module.Scene.Gameplay.RoadPool;
 using Croxxing.Module.Scene.Gameplay.VehiclePool;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
     public class VehicleController: ObjectController<VehicleController, VehicleModel, IVehicleModel, VehicleView>
     {
         private VehiclePoolController _vehiclePoolController;
-        private ScoreCalculatorController _scoreCalculatorController;
+        private RoadPoolController _roadPoolController;
 
         public void Init(VehicleModel model, VehicleView view)
         {
@@ -38,6 +38,8 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
 
         private void OnUpdate()
         {
+            if (!_roadPoolController.Model.IsPlaying) return;
+
             float speed = _model.Road.Model.VehicleVelocity;
             Vector3 position = Vector3.zero;
 
@@ -76,7 +78,7 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
             }
             else
             {
-                Debug.Log("Game over");
+                Publish(new GameOverMessage());
             }
         }
     }

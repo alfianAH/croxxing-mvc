@@ -29,6 +29,11 @@ namespace Croxxing.Module.Scene.Gameplay.Player.PlayerInput
             _inputActionsManager.Player.Pause.performed += OnPause;
         }
 
+        public void OnGameOver()
+        {
+            _inputActionsManager.Player.Disable();
+        }
+
         private void OnTapAnywhere(InputAction.CallbackContext context)
         {
             if (context.performed)

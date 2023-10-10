@@ -14,6 +14,7 @@ using Croxxing.Module.Scene.Gameplay.VehiclePool;
 using Croxxing.Module.Scene.Gameplay.ScoreCalculator;
 using Croxxing.Module.Scene.Gameplay.HUD;
 using Croxxing.Module.Scene.Gameplay.DistanceCalculator;
+using Croxxing.Module.Scene.Gameplay.GameOver;
 
 namespace Croxxing.Scene.Gameplay
 {
@@ -28,6 +29,7 @@ namespace Croxxing.Scene.Gameplay
         private RoadPoolController _roadPoolController;
         private VehiclePoolController _vehiclePoolController;
         private HUDController _hudController;
+        private GameOverController _gameOverController;
 
         protected override IController[] GetSceneDependencies()
         {
@@ -43,6 +45,7 @@ namespace Croxxing.Scene.Gameplay
                 new ScoreCalculatorController(),
                 new HUDController(),
                 new DistanceCalculatorController(),
+                new GameOverController(),
             };
         }
 
@@ -55,6 +58,7 @@ namespace Croxxing.Scene.Gameplay
             _roadPoolController.SetView(_view.roadPoolView);
             _vehiclePoolController.SetView(_view.vehiclePoolView);
             _hudController.SetView(_view.hudView);
+            _gameOverController.SetView(_view.gameOverView);
 
             yield return base.InitSceneObject();
         }
