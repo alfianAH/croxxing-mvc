@@ -1,4 +1,5 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Scene.Gameplay.Audios.SoundEffect;
 using Croxxing.Module.Scene.Gameplay.GameOver;
 using Croxxing.Module.Scene.Gameplay.GamePause;
 using Croxxing.Module.Scene.Gameplay.HUD;
@@ -20,5 +21,6 @@ namespace Croxxing.Scene.Gameplay
         public VehiclePoolView vehiclePoolView;
         public HUDView hudView;
         public GameOverView gameOverView;
+        public SoundEffectView soundEffectView;
     }
 }

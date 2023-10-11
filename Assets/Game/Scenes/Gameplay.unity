@@ -1247,6 +1247,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419883561}
   m_CullTransparentMesh: 1
+--- !u!1 &443021967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 443021968}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &443021968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443021967}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1207768120}
+  m_Father: {fileID: 1346996931}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &468707741
 GameObject:
   m_ObjectHideFlags: 0
@@ -2875,6 +2906,58 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 10}
   m_EdgeRadius: 0
+--- !u!1 &1207768119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1207768120}
+  - component: {fileID: 1207768121}
+  m_Layer: 0
+  m_Name: Sound Effect View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1207768120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207768119}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 443021968}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1207768121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207768119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d23f7cb4abf1241b915cda80e410ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundEffects:
+  - name: car-crash
+    clip: {fileID: 8300000, guid: ed3ac0ed673a99b4c89602f2d822123b, type: 3}
+    volume: 1
+    pitch: 0
+  - name: coin
+    clip: {fileID: 8300000, guid: f2ff538f6305db04e89bdef4ab873f61, type: 3}
+    volume: 1
+    pitch: 0
 --- !u!1 &1223528345
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,6 +3219,7 @@ MonoBehaviour:
   vehiclePoolView: {fileID: 802351887}
   hudView: {fileID: 1588298375}
   gameOverView: {fileID: 2106634567}
+  soundEffectView: {fileID: 1207768121}
 --- !u!4 &1346996931
 Transform:
   m_ObjectHideFlags: 0
@@ -3153,6 +3237,7 @@ Transform:
   - {fileID: 2038505710}
   - {fileID: 802351886}
   - {fileID: 1223528346}
+  - {fileID: 443021968}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

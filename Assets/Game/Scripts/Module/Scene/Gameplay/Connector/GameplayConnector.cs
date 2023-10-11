@@ -1,11 +1,13 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Message;
+using Croxxing.Module.Scene.Gameplay.Audios.SoundEffect;
 using Croxxing.Module.Scene.Gameplay.GameOver;
 using Croxxing.Module.Scene.Gameplay.GamePause;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerInput;
 using Croxxing.Module.Scene.Gameplay.Player.PlayerManager;
 using Croxxing.Module.Scene.Gameplay.RoadPool;
 using Croxxing.Module.Scene.Gameplay.VehiclePool;
+using Croxxing.Utility;
 
 namespace Croxxing.Module.Scene.Gameplay.Connector
 {
@@ -17,6 +19,7 @@ namespace Croxxing.Module.Scene.Gameplay.Connector
         private VehiclePoolController _vehiclePoolController;
         private GameOverController _gameOverController;
         private GamePauseController _gamePauseController;
+        private SoundEffectController _soundEffectController;
 
         protected override void Connect()
         {
@@ -53,6 +56,7 @@ namespace Croxxing.Module.Scene.Gameplay.Connector
             _gameOverController.OnGameOver();
             _roadPoolController.SetIsPlaying(false);
             _playerMovementController.OnGameOver();
+            _soundEffectController.Play(AudioNames.SFX_CAR_CRASH);
         }
 
         private void OnGamePause(GamePausedMessage message)

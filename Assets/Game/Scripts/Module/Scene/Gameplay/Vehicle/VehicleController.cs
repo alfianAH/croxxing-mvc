@@ -1,8 +1,10 @@
 using Agate.MVC.Base;
 using Croxxing.Module.Message;
+using Croxxing.Module.Scene.Gameplay.Audios.SoundEffect;
 using Croxxing.Module.Scene.Gameplay.Road;
 using Croxxing.Module.Scene.Gameplay.RoadPool;
 using Croxxing.Module.Scene.Gameplay.VehiclePool;
+using Croxxing.Utility;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.Vehicle
@@ -11,6 +13,7 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
     {
         private VehiclePoolController _vehiclePoolController;
         private RoadPoolController _roadPoolController;
+        private SoundEffectController _soundEffectController;
 
         public void Init(VehicleModel model, VehicleView view)
         {
@@ -75,6 +78,7 @@ namespace Croxxing.Module.Scene.Gameplay.Vehicle
                 Publish(new AddScoreMessage(10));
                 // Despawn vehicle
                 _vehiclePoolController.DespawnVehicle(this, _model.Road.Model.IsRoadInCurrentlyActivePool);
+                _soundEffectController.Play(AudioNames.SFX_COIN);
             }
             else
             {
