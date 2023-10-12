@@ -16,9 +16,11 @@ namespace Croxxing.Module.Scene.Gameplay.Audios.SoundEffect
         public void Play(string audioName)
         {
             AudioSource audioSource = GetAudioSource();
-            AudioClip audioClip = GetAudioClip(audioName);
+            SoundEffectConfig soundEffect = GetSoundEffect(audioName);
 
-            audioSource.PlayOneShot(audioClip);
+            audioSource.volume = soundEffect.Volume;
+            audioSource.pitch = soundEffect.Pitch;
+            audioSource.PlayOneShot(soundEffect.Clip);
             _view.StopAudioCoroutine(audioSource);
         }
 
@@ -28,12 +30,7 @@ namespace Croxxing.Module.Scene.Gameplay.Audios.SoundEffect
             _model.SetSoundEffectMixer(audioMixerGroup);
         }
 
-        /// <summary>
-        /// Get audio clip from audio name
-        /// </summary>
-        /// <param name="audioName">Audio name</param>
-        /// <returns>Audio clip of audio name</returns>
-        private AudioClip GetAudioClip(string audioName)
+        private SoundEffectConfig GetSoundEffect(string audioName)
         {
             SoundEffectConfig soundEffect = _view.SoundEffects.Find(
                 s => {
@@ -44,16 +41,12 @@ namespace Croxxing.Module.Scene.Gameplay.Audios.SoundEffect
                     return false;
                 }
             );
-            if (soundEffect != null) return soundEffect.Clip;
+            if (soundEffect != null) return soundEffect;
 
             Debug.LogError($"Audio clip: {audioName} not available");
             return null;
         }
 
-        /// <summary>
-        /// Get audio source in object pooling
-        /// </summary>
-        /// <returns>Available sound effect audio source</returns>
         private AudioSource GetAudioSource()
         {
             AudioSource audioSource = _model.AudioSourcePool.Find(source =>

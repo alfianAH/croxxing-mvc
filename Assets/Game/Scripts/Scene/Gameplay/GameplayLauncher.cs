@@ -16,6 +16,7 @@ using Croxxing.Module.Scene.Gameplay.HUD;
 using Croxxing.Module.Scene.Gameplay.DistanceCalculator;
 using Croxxing.Module.Scene.Gameplay.GameOver;
 using Croxxing.Module.Scene.Gameplay.Audios.SoundEffect;
+using Croxxing.Module.Scene.Gameplay.Audios.BackgroundMusic;
 
 namespace Croxxing.Scene.Gameplay
 {
@@ -32,6 +33,7 @@ namespace Croxxing.Scene.Gameplay
         private HUDController _hudController;
         private GameOverController _gameOverController;
         private SoundEffectController _soundEffectController;
+        private BackgroundMusicController _backgroundMusicController;
 
         protected override IController[] GetSceneDependencies()
         {
@@ -49,6 +51,7 @@ namespace Croxxing.Scene.Gameplay
                 new DistanceCalculatorController(),
                 new GameOverController(),
                 new SoundEffectController(),
+                new BackgroundMusicController(),
             };
         }
 
@@ -63,6 +66,7 @@ namespace Croxxing.Scene.Gameplay
             _hudController.SetView(_view.hudView);
             _gameOverController.SetView(_view.gameOverView);
             _soundEffectController.SetView(_view.soundEffectView);
+            _backgroundMusicController.SetView(_view.backgroundMusicView);
 
             yield return base.InitSceneObject();
         }
