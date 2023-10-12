@@ -2,6 +2,7 @@ using System.Collections;
 using Agate.MVC.Base;
 using Agate.MVC.Core;
 using Croxxing.Module.Global.ControlsData;
+using Croxxing.Module.Global.GameAudioData;
 using Croxxing.Module.Global.ProgressData;
 
 namespace Croxxing.Boot
@@ -22,6 +23,7 @@ namespace Croxxing.Boot
             {
                 new ControlsController(),
                 new ProgressDataController(),
+                new GameAudioDataController(),
             };
         }
 
