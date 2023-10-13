@@ -7,10 +7,10 @@ namespace Croxxing.Module.Scene.Gameplay.Audios.SoundEffect
 {
     public class SoundEffectController: ObjectController<SoundEffectController, SoundEffectModel, SoundEffectView>
     {
-        public override IEnumerator Initialize()
+        public override void SetView(SoundEffectView view)
         {
-            yield return base.Initialize();
-            LoadAudioMixer();
+            base.SetView(view);
+            LoadAudioMixerGroup();
         }
 
         public void Play(string audioName)
@@ -24,10 +24,9 @@ namespace Croxxing.Module.Scene.Gameplay.Audios.SoundEffect
             _view.StopAudioCoroutine(audioSource);
         }
 
-        private void LoadAudioMixer()
+        private void LoadAudioMixerGroup()
         {
-            AudioMixerGroup audioMixerGroup = Resources.Load<AudioMixerGroup>("Audio Mixer/SoundEffectAudioMixer");
-            _model.SetSoundEffectMixer(audioMixerGroup);
+            _model.SetSoundEffectMixer(_view.SfxAudioMixerGroup);
         }
 
         private SoundEffectConfig GetSoundEffect(string audioName)
