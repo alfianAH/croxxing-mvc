@@ -1,7 +1,5 @@
 using Agate.MVC.Base;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Audio;
 
 namespace Croxxing.Module.Scene.Gameplay.Audios.SoundEffect
 {

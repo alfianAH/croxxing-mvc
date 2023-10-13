@@ -14,6 +14,7 @@ namespace Croxxing.Boot
             return new IConnector[]
             {
                 new ControlsConnector(),
+                new GameAudioDataConnector(),
             };
         }
 

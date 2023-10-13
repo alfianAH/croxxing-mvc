@@ -27,7 +27,11 @@ namespace Croxxing.Module.Scene.MainMenu.GameSettings
         [SerializeField] private GameObject _bindActionPrefab;
         [SerializeField] private Transform _bindActionParent;
 
-        public void SetCallbacks(UnityAction onClickAudioMenuButton,  UnityAction onClickControlsMenuButton, Action onSceneStart)
+        [Header("Audio Prefab")]
+        [SerializeField] private GameObject _audioSettingPrefab;
+        [SerializeField] private Transform _audioSettingParent;
+
+        public void SetCallbacks(UnityAction onClickAudioMenuButton, UnityAction onClickControlsMenuButton, Action onSceneStart)
         {
             _audioMenuButton.onClick.RemoveAllListeners();
             _audioMenuButton.onClick.AddListener(onClickAudioMenuButton);
@@ -42,6 +46,12 @@ namespace Croxxing.Module.Scene.MainMenu.GameSettings
         {
             GameObject duplicateBindAction = Instantiate(_bindActionPrefab, _bindActionParent);
             return duplicateBindAction;
+        }
+
+        public GameObject DuplicateAudioSettingObject()
+        {
+            GameObject duplicateAudioSetting = Instantiate(_audioSettingPrefab, _audioSettingParent);
+            return duplicateAudioSetting;
         }
 
         public void ActivateAudioMenu()

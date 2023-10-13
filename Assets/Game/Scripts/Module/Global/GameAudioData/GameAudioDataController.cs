@@ -1,4 +1,6 @@
 using Agate.MVC.Base;
+using Croxxing.Module.Message;
+using Croxxing.Utility;
 using System.Collections;
 using System.IO;
 using UnityEngine;
@@ -13,18 +15,19 @@ namespace Croxxing.Module.Global.GameAudioData
             Load();
         }
 
-        public void SetBgmVolume(float bgmVolume)
+        public void OnSliderValueChanged(UpdateVolumeMessage message)
         {
-            _model.SetBgmVolume(bgmVolume);
-        }
+            switch (message.VolumeType)
+            {
+                case AudioVolume.BGM_VOLUME_TYPE:
+                    _model.SetBgmVolume(message.Volume);
+                    break;
 
-        public void SetSfxVolume(float sfxVolume)
-        {
-            _model.SetSfxVolume(sfxVolume);
-        }
+                case AudioVolume.SFX_VOLUME_TYPE:
+                    _model.SetSfxVolume(message.Volume);
+                    break;
+            }
 
-        public void SaveVolume()
-        {
             Save();
         }
 
