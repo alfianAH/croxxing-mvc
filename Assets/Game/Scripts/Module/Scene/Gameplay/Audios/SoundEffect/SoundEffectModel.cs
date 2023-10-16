@@ -8,7 +8,8 @@ namespace Croxxing.Module.Scene.Gameplay.Audios.SoundEffect
     public class SoundEffectModel: BaseModel
     {
         public List<AudioSource> AudioSourcePool { get; private set; } = new List<AudioSource>();
-        public AudioMixerGroup SoundEffectMixer { get; private set; }
+        public SoundEffectScriptableObject SoundEffect { get; private set; }
+        public AudioMixerGroup SoundEffectMixerGroup { get; private set; }
 
         public void AddAudioSource(AudioSource audioSource)
         {
@@ -16,9 +17,15 @@ namespace Croxxing.Module.Scene.Gameplay.Audios.SoundEffect
             SetDataAsDirty();
         }
 
-        public void SetSoundEffectMixer(AudioMixerGroup soundEffectMixer)
+        public void SetSoundEffect(SoundEffectScriptableObject soundEffect)
         {
-            SoundEffectMixer = soundEffectMixer;
+            SoundEffect = soundEffect;
+            SetDataAsDirty();
+        }
+
+        public void SetSoundEffectMixerGroup(AudioMixerGroup soundEffectMixer)
+        {
+            SoundEffectMixerGroup = soundEffectMixer;
             SetDataAsDirty();
         }
     }

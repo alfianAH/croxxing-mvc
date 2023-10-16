@@ -1,11 +1,18 @@
 using Agate.MVC.Base;
 using Croxxing.Utility;
+using System.Collections;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.Audios.BackgroundMusic
 {
-    public class BackgroundMusicController: ObjectController<BackgroundMusicController, BackgroundMusicView>
+    public class BackgroundMusicController: ObjectController<BackgroundMusicController, BackgroundMusicModel, BackgroundMusicView>
     {
+        public override IEnumerator Initialize()
+        {
+            yield return base.Initialize();
+            LoadBackgroundMusic();
+        }
+
         public override void SetView(BackgroundMusicView view)
         {
             base.SetView(view);
@@ -25,9 +32,15 @@ namespace Croxxing.Module.Scene.Gameplay.Audios.BackgroundMusic
             audioSource.Play();
         }
 
+        private void LoadBackgroundMusic()
+        {
+            BackgroundMusicScriptableObject bgm = Resources.Load<BackgroundMusicScriptableObject>("Scriptable Objects/Audio/Background Musics");
+            _model.SetBackgroundMusic(bgm);
+        }
+
         private BackgroundMusicConfig GetBackgroundMusic(string audioName)
         {
-            BackgroundMusicConfig backgroundMusic = _view.BackgroundMusics.Find(
+            BackgroundMusicConfig backgroundMusic = _model.BackgroundMusic.BackgroundMusics.Find(
                 b => {
                     if (b.Name.ToLower() == audioName.ToLower())
                     {

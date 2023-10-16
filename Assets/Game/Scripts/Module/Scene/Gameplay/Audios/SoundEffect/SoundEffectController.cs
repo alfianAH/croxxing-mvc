@@ -1,10 +1,17 @@
 using Agate.MVC.Base;
+using System.Collections;
 using UnityEngine;
 
 namespace Croxxing.Module.Scene.Gameplay.Audios.SoundEffect
 {
     public class SoundEffectController: ObjectController<SoundEffectController, SoundEffectModel, SoundEffectView>
     {
+        public override IEnumerator Initialize()
+        {
+            yield return base.Initialize();
+            LoadSoundEffect();
+        }
+
         public override void SetView(SoundEffectView view)
         {
             base.SetView(view);
@@ -24,12 +31,18 @@ namespace Croxxing.Module.Scene.Gameplay.Audios.SoundEffect
 
         private void LoadAudioMixerGroup()
         {
-            _model.SetSoundEffectMixer(_view.SfxAudioMixerGroup);
+            _model.SetSoundEffectMixerGroup(_view.SfxAudioMixerGroup);
+        }
+
+        private void LoadSoundEffect()
+        {
+            SoundEffectScriptableObject sfx = Resources.Load<SoundEffectScriptableObject>("Scriptable Objects/Audio/Sound Effects");
+            _model.SetSoundEffect(sfx);
         }
 
         private SoundEffectConfig GetSoundEffect(string audioName)
         {
-            SoundEffectConfig soundEffect = _view.SoundEffects.Find(
+            SoundEffectConfig soundEffect = _model.SoundEffect.SoundEffects.Find(
                 s => {
                     if (s.Name.ToLower() == audioName.ToLower())
                     {
@@ -56,7 +69,7 @@ namespace Croxxing.Module.Scene.Gameplay.Audios.SoundEffect
 
                 // Set mixer
                 audioSource = newAudioObject.GetComponent<AudioSource>();
-                audioSource.outputAudioMixerGroup = _model.SoundEffectMixer;
+                audioSource.outputAudioMixerGroup = _model.SoundEffectMixerGroup;
 
                 // Add to pool
                 _model.AddAudioSource(audioSource);
