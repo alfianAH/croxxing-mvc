@@ -1,4 +1,6 @@
+using Agate.MVC.Core;
 using Croxxing.Boot;
+using Croxxing.Module.Scene.MainMenu.Menu;
 using Croxxing.Utility;
 using System.Collections;
 
@@ -8,20 +10,21 @@ namespace Croxxing.Scene.MainMenu
     {
         public override string SceneName => GameScenes.MAIN_MENU;
 
+        private MenuController _menuController;
+
+        protected override IController[] GetSceneDependencies()
+        {
+            return new IController[]
+            {
+                new MenuController(),
+            };
+        }
+
         protected override IEnumerator InitSceneObject()
         {
-            _view.SetCallbacks(OnClickPlayButton, OnClickCreditsButton);
-            yield return null;
-        }
+            _menuController.SetView(_view.menuView);
 
-        private void OnClickPlayButton()
-        {
-            SceneLoader.Instance.LoadScene(GameScenes.GAMEPLAY);
-        }
-
-        private void OnClickCreditsButton()
-        {
-            SceneLoader.Instance.LoadScene(GameScenes.CREDITS);
+            yield return base.InitSceneObject();
         }
     }
 }

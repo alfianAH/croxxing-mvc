@@ -302,7 +302,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 41a19717275cea641a2bafac1cef21c6, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -381,7 +381,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 41a19717275cea641a2bafac1cef21c6, type: 3}
     m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
@@ -414,6 +414,7 @@ GameObject:
   - component: {fileID: 728101492}
   - component: {fileID: 728101491}
   - component: {fileID: 728101490}
+  - component: {fileID: 728101493}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -506,6 +507,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &728101493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728101488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97abf8b8ac1ac3941bff83d0af0ef317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playButton: {fileID: 48082915}
+  _settingsButton: {fileID: 1076885189}
+  _creditsButton: {fileID: 2034318806}
 --- !u!1 &932195903
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,8 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00eab9c3f4f7ce14988d4a7d63feb217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playButton: {fileID: 48082915}
-  _creditsButton: {fileID: 2034318806}
+  menuView: {fileID: 728101493}
 --- !u!4 &1021842485
 Transform:
   m_ObjectHideFlags: 0
@@ -850,7 +865,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 41a19717275cea641a2bafac1cef21c6, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -929,7 +944,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 41a19717275cea641a2bafac1cef21c6, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
