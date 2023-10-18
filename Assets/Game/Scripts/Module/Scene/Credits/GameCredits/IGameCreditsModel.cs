@@ -1,5 +1,4 @@
 using Agate.MVC.Base;
-using System.Collections.Generic;
 
 namespace Croxxing.Module.Scene.Credits.GameCredits
 {
