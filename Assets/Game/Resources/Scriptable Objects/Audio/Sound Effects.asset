@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 3bb62424bc2250f498f15fc4927212f1, type: 3}
   m_Name: Sound Effects
-  m_EditorClassIdentifier: Assembly-CSharp:Croxxing.Module.Scene.Gameplay.Audios.SoundEffect:SoundEffectScriptableObject
+  m_EditorClassIdentifier: 
   _soundEffects:
   - _name: car-crash
     _clip: {fileID: 8300000, guid: ed3ac0ed673a99b4c89602f2d822123b, type: 3}

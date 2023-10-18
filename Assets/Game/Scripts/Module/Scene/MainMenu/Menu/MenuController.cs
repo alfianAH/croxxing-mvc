@@ -9,7 +9,7 @@ namespace Croxxing.Module.Scene.MainMenu.Menu
         public override void SetView(MenuView view)
         {
             base.SetView(view);
-            view.SetCallbacks(OnClickPlayButton, OnClickSettingsButton, OnClickCreditsButton);
+            view.SetCallbacks(OnClickPlayButton, OnClickSettingsButton, OnClickCreditsButton, OnClickCloseSettingsButton);
         }
 
         private void OnClickPlayButton()
@@ -19,12 +19,17 @@ namespace Croxxing.Module.Scene.MainMenu.Menu
 
         private void OnClickSettingsButton()
         {
-
+            _view.SetActiveSettingPanel(true);
         }
-
+       
         private void OnClickCreditsButton()
         {
             SceneLoader.Instance.LoadScene(GameScenes.CREDITS);
+        }
+
+        private void OnClickCloseSettingsButton()
+        {
+            _view.SetActiveSettingPanel(false);
         }
     }
 }
