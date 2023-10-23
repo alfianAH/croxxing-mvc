@@ -1,5 +1,3 @@
-using UnityEngine.SocialPlatforms.Impl;
-
 namespace Croxxing.Module.Message
 {
     public struct UpdateDistanceMessage
